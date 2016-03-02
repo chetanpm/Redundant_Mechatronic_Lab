@@ -258,7 +258,7 @@ a:focus {
     width: 100%;
     padding: 50px 0;
     color: #fff;
-    background: url({{ site.baseurl}}/assets/img/downloads-bg.jpg) no-repeat center center scroll;
+    background: url({{ site.baseurl}}/assets/img/works-bg1.jpg) no-repeat center center scroll;
     background-color: {{ site.color.primary-dark }};
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -370,4 +370,94 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
+}
+
+.slogan {
+  color: #E59B4A;
+}
+
+/* Gallery */
+.gallery {
+	margin-top: 30px;
+}
+
+.gallery img:hover {
+	opacity: 0.4;
+}
+
+/*contact form*/
+form {
+  max-width: 450px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+  input, textarea {
+    border: 3px solid $accent;
+    width: 100%;
+    @include box-sizing(border-box);
+    padding: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    &:focus {
+      outline: none;
+      border-color: $accent-light;
+    }
+  }
+  textarea {
+    height: 10em;
+    resize: none;
+  }
+  .submit-wrap {
+    text-align: right;
+  }
+  [type="submit"] {
+    background: $accent;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    width: 33%;
+    &:hover {
+      background: $accent-light;
+    }
+  }
+  .contact-info-group {
+    label {
+      width: 50%;
+      float: left;
+      @include box-sizing(border-box);
+      &:nth-child(1) {
+        padding-right: 10px;
+      }
+      &:nth-child(2) {
+        padding-left: 10px;
+      }
+    }
+  }
+  label {
+    display: block;
+    margin-bottom: 20px;
+    span {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 541px) {
+  form {
+    .contact-info-group {
+      label {
+        width: 100%;
+        &:nth-child(1) {
+          padding: 0;
+        }
+        &:nth-child(2) {
+          padding: 0;
+        }
+      }
+    }
+    [type="submit"] {
+      width: 100%;
+    }
+  }
 }
