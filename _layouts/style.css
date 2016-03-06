@@ -1,3 +1,4 @@
 {% include css/bootstrap.min.css %}
 {% include css/custom.css %}
-{% include css/work-gallery.scss %}
+{% include css/work-gallery.css %}
+{% include css/form.css %}

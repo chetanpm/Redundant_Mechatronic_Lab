@@ -135,10 +135,10 @@ a:focus {
     display: table;
     width: 100%;
     height: 100%;
-    padding: 100px 0;
+    padding: 50px 0;
     text-align: center;
     color: #fff;
-    background: url({{ site.baseurl}}/assets/img/sky-min.jpg) no-repeat bottom center scroll;
+    background: url({{ site.baseurl }}/assets/img/sky-min.jpg) no-repeat bottom center scroll;
     background-color: {{ site.color.primary-dark }};
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -258,7 +258,7 @@ a:focus {
     width: 100%;
     padding: 50px 0;
     color: #fff;
-    background: url({{ site.baseurl}}/assets/img/works-bg1.jpg) no-repeat center center scroll;
+    background: url({{ site.baseurl }}/assets/img/works-bg1.jpg) no-repeat center center scroll;
     background-color: {{ site.color.primary-dark }};
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -376,15 +376,15 @@ body {
   color: #E59B4A;
 }
 
-a.page-scroll.about {
+.page-scroll.about {
   border-bottom: 2px solid #21E1DD;
 }
 
-a.page-scroll.works {
+.page-scroll.works {
   border-bottom: 2px solid white;
 }
 
-a.page-scroll.contact {
+.page-scroll.contact {
   border-bottom: 2px solid #21E1DD;
 }
 
@@ -398,78 +398,3 @@ a.page-scroll.contact {
 }
 
 /*contact form*/
-form {
-  max-width: 450px;
-  margin: 0 auto 100px;
-  padding: 0 20px;
-  input, textarea {
-    border: 3px solid $accent;
-    width: 100%;
-    @include box-sizing(border-box);
-    padding: 10px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    font-size: 16px;
-    &:focus {
-      outline: none;
-      border-color: $accent-light;
-    }
-  }
-  textarea {
-    height: 10em;
-    resize: none;
-  }
-  .submit-wrap {
-    text-align: right;
-  }
-  [type="submit"] {
-    background: $accent;
-    color: white;
-    font-size: 18px;
-    text-transform: uppercase;
-    width: 33%;
-    &:hover {
-      background: $accent-light;
-    }
-  }
-  .contact-info-group {
-    label {
-      width: 50%;
-      float: left;
-      @include box-sizing(border-box);
-      &:nth-child(1) {
-        padding-right: 10px;
-      }
-      &:nth-child(2) {
-        padding-left: 10px;
-      }
-    }
-  }
-  label {
-    display: block;
-    margin-bottom: 20px;
-    span {
-      display: block;
-    }
-  }
-}
-
-@media (max-width: 541px) {
-  form {
-    .contact-info-group {
-      label {
-        width: 100%;
-        &:nth-child(1) {
-          padding: 0;
-        }
-        &:nth-child(2) {
-          padding: 0;
-        }
-      }
-    }
-    [type="submit"] {
-      width: 100%;
-    }
-  }
-}

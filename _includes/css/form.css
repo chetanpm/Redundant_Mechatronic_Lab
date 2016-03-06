@@ -1,0 +1,35 @@
+label {
+  color: white
+}
+input,
+textarea {
+  /*display: block;*/
+  margin: 1em;
+  color: black;
+}
+
+input[type=text] {
+  border: 0;
+  padding: 1em;
+  border-radius: 8px;
+  color: black;
+}
+
+input[type=email] {
+  border: 0;
+  padding: 1em;
+  border-radius: 8px;
+  width: 300px;
+  color: black;
+}
+
+input[type=submit] {
+  background: #E59B4A;
+  border-radius: 2px;
+}
+
+:focus {
+  background: #21E1DD;
+  transition: background .5s;
+  outline: 0;
+}

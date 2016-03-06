@@ -3,27 +3,24 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact</h2>
-                <form method="POST" action="//formspree.io/{{ site.data.settings.email }}">
+                <form action="//formspree.io/nickymarch1@hotmail.com" method="POST">
 
-                  <fieldset class="contact-info-group">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" placeholder="Your Name">
 
-                    <label><span>Your Name</span>
-                    <input type="text" name="name"></label>
+                  <label for="_replyto">Email</label>
+                  <input type="email" name="_replyto" placeholder="your email @ddress">
 
-                    <label><span>Your Email</span>
-                    <input type="email" name="_replyto"></label>
+                  <label for="message">Tell us about your requirement</label>
+                  <textarea name="message" id="" cols="20" rows="5"></textarea>
 
-                  </fieldset>
+                  <input type="submit" value="Send">
 
-                  <label><span>Tell us about your project</span>
-                  <textarea name="message"></textarea></label>
-
-                  <fieldset class="submit-wrap">
-                    <input type="submit" value="Send">
-                  </fieldset>
+                <!-- Hidden Field   -->
+                 <input type="text" name="_gotcha" style="display:none" />
+                  <input type="hidden" name="_next" value="http://ewu.edu" />
 
                 </form>
-
                 <p><a href="mailto:{{ site.email }}">{{ site.email }}</a>
                 </p>
             </div>
