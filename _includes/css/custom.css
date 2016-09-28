@@ -44,6 +44,21 @@ p {
     }
 }
 
+@media (min-width: 564px) {
+  body {
+    z-index: 564; } }
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+    line-height: 28px;
+    z-index: 768; } }
+@media (min-width: 964px) {
+  body {
+    z-index: 964; } }
+@media (min-width: 1124px) {
+  body {
+    z-index: 1124; } }
+
 a {
     color: {{ site.color.links }};
     -webkit-transition: all .2s ease-in-out;
