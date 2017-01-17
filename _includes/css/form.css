@@ -12,7 +12,7 @@ input[type=text] {
   border: 0;
   padding: 1em;
   border-radius: 8px;
-  color: black;
+  color: #00567A;
 }
 
 input[type=email] {
@@ -20,7 +20,7 @@ input[type=email] {
   padding: 1em;
   border-radius: 8px;
   width: 300px;
-  color: black;
+  color: #00567A;
 }
 
 input[type=submit] {
