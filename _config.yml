@@ -1,9 +1,9 @@
 # Site settings
-title: Compose lab
-email: composelab@outlook.com
+title: Redundant Mechatronic Lab
+email: redundantlab@pm.me
 description: Make stuff of your dreams into the reality. We help compose them.
-baseurl: /compose-lab
-url: "https://compose-lab.in" # the base hostname & protocol for your site
+baseurl: /redundantlab
+url: "https://redundantlab.in" # the base hostname & protocol for your site
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
@@ -21,7 +21,7 @@ social:
   - title: bitbucket
     url: http://bitbucket.org/jekyll
   - title: github
-    url: https://github.com/chetanpm/compose-lab
+    url: https://github.com/chetanpm/redundantlab
 
 # Build settings
 markdown: kramdown
