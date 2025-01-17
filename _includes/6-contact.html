@@ -1,28 +1,63 @@
-    <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contact</h2>
-                <form action="//formspree.io/nickymarch1@hotmail.com" method="POST">
+<!-- Contact Section -->
+<section id="contact" class="container content-section text-center">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>Contact Us</h2>
+            <p>Fill out the form below, and we’ll get back to you soon.</p>
 
-                  <label for="name">Name</label>
-                  <input type="text" name="name" placeholder="Your Name">
+            <form action="https://formsubmit.co/redundantlab@pm.me" method="POST">
+                <!-- Name Field -->
+                <div>
+                    <label for="name">Full Name <span style="color:red;">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+                </div>
 
-                  <label for="_replyto">Email</label>
-                  <input type="email" name="_replyto" placeholder="your email @ddress">
+                <!-- Email Field -->
+                <div>
+                    <label for="email">Email Address <span style="color:red;">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                </div>
 
-                  <label for="message">Tell us about your requirement</label>
-                  <textarea name="message" id="" cols="20" rows="5"></textarea>
+                <!-- Phone Number Field -->
+                <div>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Your Contact Number">
+                </div>
 
-                  <input type="submit" value="Send">
+                <!-- Subject Dropdown -->
+                <div>
+                    <label for="subject">Subject <span style="color:red;">*</span></label>
+                    <select id="subject" name="subject" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Request a Quote">Request a Quote</option>
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Partnership Inquiry">Partnership Inquiry</option>
+                    </select>
+                </div>
 
-                <!-- Hidden Field   -->
-                 <input type="text" name="_gotcha" style="display:none" />
-                  <input type="hidden" name="_next" value="http://ewu.edu" />
+                <!-- Message Field -->
+                <div>
+                    <label for="message">Message <span style="color:red;">*</span></label>
+                    <textarea id="message" name="message" placeholder="Tell us about your requirement" rows="5" required></textarea>
+                </div>
 
-                </form>
-                <p><a href="mailto:{{ site.email }}">{{ site.email }}</a>
-                </p>
-            </div>
+                <!-- Hidden Spam Protection -->
+                <input type="text" name="_honey" style="display:none">
+                
+                <!-- Hidden Redirect on Submission -->
+                <input type="hidden" name="_next" value="/Redundant_Mechatronic_Lab/thank-you.html">
+
+                <!-- Disable Captcha (Optional) -->
+                <input type="hidden" name="_captcha" value="false">
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+
+            <p>Or email us directly at <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
         </div>
-    </section>
+    </div>
+</section>
