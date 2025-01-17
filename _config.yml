@@ -26,3 +26,7 @@ social:
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+# ✅ Ensure Jekyll includes the _pages directory
+include:
+  - _pages
