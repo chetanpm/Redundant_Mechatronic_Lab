@@ -6,4 +6,4 @@ permalink: /Redundant_Mechatronic_Lab/thank-you/
 
 <h1>Thank You!</h1>
 <p>Your message has been received. We will get back to you soon.</p>
-<a href="/">Return to Home</a>
+<a href="{{ site.baseurl }}/" class="btn btn-primary">Return to Home</a>
