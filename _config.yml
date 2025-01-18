@@ -2,8 +2,17 @@
 title: Redundant Mechatronic Lab
 email: redundantlab@pm.me
 description: Make stuff of your dreams into the reality. We help compose them.
-baseurl: /redundantlab
-url: "https://redundantlab.in" # the base hostname & protocol for your site
+# Use correct baseurl
+baseurl: "/Redundant_Mechatronic_Lab" # Change this to match GitHub Pages URL
+url: "https://chetanpm.github.io"    # GitHub Pages main domain
+# Ensure Jekyll includes the _pages directory
+include:
+  - _pages
+# Ensure pages are generated
+collections:
+  pages:
+    output: true
+    permalink: /:path/
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
@@ -26,7 +35,3 @@ social:
 # Build settings
 markdown: kramdown
 permalink: pretty
-
-# ✅ Ensure Jekyll includes the _pages directory
-include:
-  - _pages

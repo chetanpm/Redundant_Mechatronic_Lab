@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Thank You
-permalink: https://chetanpm.github.io/Redundant_Mechatronic_Lab/thank-you/
+permalink: /Redundant_Mechatronic_Lab/thank-you/
 ---
 
 <h1>Thank You!</h1>
