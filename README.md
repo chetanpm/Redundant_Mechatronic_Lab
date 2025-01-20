@@ -1,2 +1,2 @@
-# compose-lab
+# redundant-lab
 Introductory page for my website

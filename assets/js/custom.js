@@ -38,8 +38,8 @@ $("a").mouseup(function(){
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-    var latitude = 12.305743; // Replace with actual latitude
-    var longitude = 76.655248; // Replace with actual longitude
+    var latitude = 12.352912; // Replace with actual latitude
+    var longitude = 76.647839; // Replace with actual longitude
 
     // Initialize the Leaflet Map
     var map = L.map('map').setView([latitude, longitude], 15);

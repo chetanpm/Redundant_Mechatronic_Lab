@@ -1,7 +1,7 @@
 ---
-layout: default
-title: Thank You
-permalink: /Redundant_Mechatronic_Lab/thank-you/
+layout: page
+title: "Thank You"
+permalink: /thank-you/
 ---
 
 <h1>Thank You!</h1>
