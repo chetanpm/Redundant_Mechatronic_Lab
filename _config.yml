@@ -2,24 +2,29 @@
 title: Redundant Mechatronic Lab
 email: redundantlab@pm.me
 description: Make stuff of your dreams into the reality. We help compose them.
+
 # Use correct baseurl
-baseurl: "/Redundant_Mechatronic_Lab" # Change this to match GitHub Pages URL
-url: "https://chetanpm.github.io"    # GitHub Pages main domain
+baseurl: "/Redundant_Mechatronic_Lab"  # Change this to match GitHub Pages repository name
+url: "https://chetanpm.github.io"      # GitHub Pages main domain
+
 # Ensure Jekyll includes the _pages directory
 include:
   - _pages
-# Ensure pages are generated
+
+# Define pages collection correctly
 collections:
   pages:
     output: true
-    permalink: /:path/
+
+# Set permalink structure to avoid conflicts
+permalink: pretty  # Ensures pages generate clean URLs like /thank-you/
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
   primary-dark: '#000000'
   links: '#007DAC'
 
-# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+# Social networks usernames
 social:
   - title: twitter
     url: https://twitter.com/pmchetan
@@ -34,4 +39,11 @@ social:
 
 # Build settings
 markdown: kramdown
-permalink: pretty
+paginate: 5  # Optional: Set pagination for blog posts
+paginate_path: "/page:num/"
+
+# Plugins (Optional, but useful)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
