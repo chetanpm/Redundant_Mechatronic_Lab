@@ -1,34 +1,42 @@
 <!-- Navigation -->
-   <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-       <div class="container">
-           <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                   <i class="fa fa-bars"></i>
-               </button>
-               <a class="navbar-brand page-scroll" href="#page-top">
-                   <i class="fa"></i>  <span class="light">Redundant</span> lab
-               </a>
-           </div>
-
-           <!-- Collect the nav links, forms, and other content for toggling -->
-           <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-               <ul class="nav navbar-nav">
-                   <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                   <li class="hidden">
-                       <a href="#page-top"></a>
-                   </li>
-                   <li>
-                       <a class="page-scroll about" href="#about">About</a>
-                   </li>
-                   <li>
-                       <a class="page-scroll projects" href="#projects">Projects</a>
-                   </li>
-                   <li>
-                       <a class="page-scroll contact" href="#contact">Contact</a>
-                   </li>
-               </ul>
-           </div>
-           <!-- /.navbar-collapse -->
-       </div>
-       <!-- /.container -->
-   </nav>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">
+                <i class="fa"></i>  <span class="light">Redundant</span> lab
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <li class="hidden"><a href="#page-top"></a></li>
+                <li><a class="page-scroll about" href="#about">About</a></li>
+                <li><a class="page-scroll projects" href="#projects">Projects</a></li>
+                <li><a class="page-scroll contact" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+ </nav>
+ 
+ <script>
+ $(document).ready(function() {
+   // Close mobile navbar when link is clicked
+   $('.navbar-collapse ul li a').click(function(){
+       $('.navbar-collapse').collapse('hide');
+   });
+ 
+   // Highlight active section in navbar
+   $(window).on('scroll', function() {
+     var scrollPos = $(document).scrollTop();
+     $('.nav a').each(function () {
+       var section = $(this).attr("href");
+       if ($(section).position().top <= scrollPos + 100) {
+         $('.nav li').removeClass("active");
+         $(this).parent().addClass("active");
+       }
+     });
+   });
+ });
+ </script>

@@ -15,14 +15,18 @@ $(window).scroll(function() {
     }
 });
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("a.page-scroll").forEach(anchor => {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 50, // Adjust offset if needed
+                    behavior: "smooth"
+                });
+            }
+        });
     });
 });
 
@@ -37,22 +41,58 @@ $("a").mouseup(function(){
     $(this).blur();
 })
 
-document.addEventListener("DOMContentLoaded", function() {
-    var latitude = 12.352912; // Replace with actual latitude
-    var longitude = 76.647839; // Replace with actual longitude
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".contact-form-wrapper form");
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent page reload
 
-    // Initialize the Leaflet Map
-    var map = L.map('map').setView([latitude, longitude], 15);
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById("successModal").style.display = "block";
+                    form.reset(); // Clear form fields
+                } else {
+                    document.getElementById("errorModal").style.display = "block";
+                }
+            })
+            .catch(error => {
+                console.error("Form submission error:", error);
+                document.getElementById("errorModal").style.display = "block";
+            });
+        });
+    }
+});
 
-    // Load OpenStreetMap tiles
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var mapContainer = document.getElementById("map");
+
+  if (mapContainer) {
+    var map = L.map('map').setView([12.2958, 76.6394], 13); // Mysore coordinates
+
+    // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Add a marker
-    var marker = L.marker([latitude, longitude]).addTo(map);
+    // Add Marker
+    var marker = L.marker([12.2958, 76.6394]).addTo(map)
+      .bindPopup("<b>Redundant Mechatronic Lab</b><br>Mysore City")
+      .openPopup();
 
-    // Clickable Popup to Open Google Maps
-    var googleMapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-    marker.bindPopup(`<b>Our Location</b><br><a href="${googleMapsLink}" target="_blank">Open in Google Maps</a>`).openPopup();
+    // Clickable marker to open Google Maps
+    marker.on('click', function() {
+      window.open("https://www.google.com/maps/search/?api=1&query=12.2958,76.6394", "_blank");
+    });
+  }
 });

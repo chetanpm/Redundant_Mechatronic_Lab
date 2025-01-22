@@ -1,28 +1,27 @@
-<!-- Download Section -->
-<section id="works" class="content-section text-center">
-    <div class="works-section">
-        <div class="container">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Ongoing projects</h2>
-                <div class="case-study-gallery">
-                  <div class="case-study study1">
-                    <div class="case-study__overlay">
-                      <h2 class="case-study__title">project<br>neuro</h2>
-                      <a class="case-study__link" >Coming soon</a>
-                    </div>
-                  </div>
-
-                  <div class="case-study study2">
-                    <div class="case-study__overlay">
-                      <h2 class="case-study__title">project<br>reachout</h2>
-                      <a class="case-study__link" >Coming soon</a>
-                    </div>
+<!-- Projects Section -->
+<section id="projects" class="content-section text-center">
+  <div class="projects-section">
+      <div class="container">
+          <div class="col-lg-8 col-lg-offset-2">
+              <h2>Ongoing Projects</h2>
+              <div class="case-study-gallery">
+                {% for project in site.data.projects %}
+                <div class="case-study study{{ forloop.index }}">
+                  <div class="case-study__overlay">
+                    <h2 class="case-study__title">{{ project.name }}</h2>
+                    {% if project.link %}
+                      <a class="case-study__link" href="{{ project.link }}">Learn more</a>
+                    {% else %}
+                      <span class="case-study__link">Coming soon</span>
+                    {% endif %}
                   </div>
                 </div>
-                <a href="#contact" class="btn btn-circle page-scroll">
-                  <i class="fa fa-angle-double-down animated"></i>
-                </a>
-            </div>
-        </div>
-    </div>
+                {% endfor %}
+              </div>
+              <a href="#contact" class="btn btn-circle page-scroll">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+          </div>
+      </div>
+  </div>
 </section>
