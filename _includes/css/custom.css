@@ -351,6 +351,12 @@ ul.banner-social-buttons li {
     }
 }
 
+@media (max-width: 768px) {
+    .btn-circle {
+        border: 2px solid white !important;
+    }
+}
+
 footer {
     padding: 50px 0;
 }
