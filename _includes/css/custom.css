@@ -194,14 +194,14 @@ a:focus {
     height: 70px;
     margin-top: 15px;
     padding: 7px 16px;
-    border: 2px solid #fff;
-    border-radius: 35px;
+    border: 2px solid white !important; /* Explicit white border */
+    border-radius: 50%;
     font-size: 40px;
-    color: #fff;
-    background: 0 0;
-    -webkit-transition: background .3s ease-in-out;
-    -moz-transition: background .3s ease-in-out;
-    transition: background .3s ease-in-out;
+    color: white;
+    background: transparent;
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
 }
 
 
@@ -314,7 +314,7 @@ a:focus {
 .btn-default {
     border: 1px solid {{ site.color.links }};
     color: {{ site.color.links }};
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .btn-default:hover,
