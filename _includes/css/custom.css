@@ -490,3 +490,37 @@ button[type="submit"]:hover {
 .modal-content button:hover {
     background-color: #005f8c;
 }
+
+.project-details {
+    display: none; /* Hide initially */
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.project-details img {
+    max-width: 80%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.close-details {
+    margin-top: 10px;
+    padding: 5px 15px;
+    border: none;
+    background-color: #E54A53;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-details:hover {
+    background-color: #c0392b;
+}

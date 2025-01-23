@@ -1,5 +1,3 @@
-- name: Project Neuro
-  link: https://yourwebsite.com/neuro
-
-- name: Project Reachout
-  link: https://yourwebsite.com/reachout
+- name: Aerostatic Turning Spindle
+  details: "A high-precision turning spindle utilizing aerostatic bearings for ultra-low friction performance."
+  image: "/Redundant_Mechatronic_Lab/assets/img/aerostatic_spindle.jpg"

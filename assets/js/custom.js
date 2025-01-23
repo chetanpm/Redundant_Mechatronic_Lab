@@ -96,3 +96,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// Project details split open animation
+function toggleProjectDetails(index) {
+    var details = document.getElementById("project-details-" + index);
+    if (details) {
+        if (details.style.display === "block") {
+            details.style.display = "none";
+        } else {
+            details.style.display = "block";
+        }
+    }
+}
