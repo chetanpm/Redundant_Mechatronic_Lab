@@ -269,16 +269,59 @@ a:focus {
     padding-top: 100px;
 }
 
-.projects-section {
-    width: 100%;
-    padding: 50px 0;
-    color: #fff;
-    background: url({{ site.baseurl }}/assets/img/works-bg1.jpg) no-repeat center center scroll;
-    background-color: {{ site.color.primary-dark }};
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
+.case-study {
+    position: relative;
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: 20px auto;
     background-size: cover;
-    -o-background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+.project-image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.project-details {
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.project-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-details ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.close-details {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #E54A53;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-details:hover {
+    background-color: #c0392b;
 }
 
 #map {

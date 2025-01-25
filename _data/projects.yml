@@ -1,3 +1,34 @@
-- name: Aerostatic Turning Spindle
-  details: "A high-precision turning spindle utilizing aerostatic bearings for ultra-low friction performance."
-  image: "/Redundant_Mechatronic_Lab/assets/img/aerostatic_spindle.jpg"
+- name: Desktop Milling Machine
+  details: "A high-precision desktop CNC milling machine for small-scale manufacturing."
+  image: "/assets/img/desktop_milling_machine.jpg"
+  specifications:
+    - label: Spindle Speed
+      value: 24,000 RPM
+    - label: Work Area
+      value: 300mm x 200mm x 100mm
+    - label: Accuracy
+      value: ± 0.01mm
+
+- name: Aerostatic Bearing Spindle
+  details: "A high-speed turning spindle with aerostatic bearings for ultra-low friction performance in collaboration with CMTI."
+  image: "/assets/img/aerostatic_spindle.jpg"
+  specifications:
+    - label: Max Speed
+      value: 12,000 RPM
+    - label: Bearing Type
+      value: Aerostatic
+    - label: Axial stiffness
+      value: 300 N/µ
+    - label: Radial stiffness
+      value: 150 N/µ
+
+- name: Tabletop 4-Axis Milling Machine
+  details: "A compact 4-axis milling machine for prototyping developed with Max Automation Bengalurur."
+  image: "/assets/img/tabletop_4axis_milling.jpg"
+  specifications:
+    - label: Axis Configuration
+      value: X, Y, Z, B (Rotary)
+    - label: Controller
+      value: Custom LinuxCNC
+    - label: Axes resolution
+      value: ± 15µ with absolute linear scale
