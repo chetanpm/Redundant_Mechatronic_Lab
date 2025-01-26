@@ -567,3 +567,60 @@ button[type="submit"]:hover {
 .close-details:hover {
     background-color: #c0392b;
 }
+
+/* Project section */
+
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the projects */
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.project-wrapper {
+    flex: 1 1 30%; /* Makes sure 3 projects fit in one row */
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.project-thumbnail {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.project-thumbnail img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.project-thumbnail:hover {
+    transform: scale(1.05);
+}
+
+/* Expanded Project Details */
+.project-details {
+    display: none;
+    margin-top: 50px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.project-details img {
+    max-width: 60%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.project-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-details ul li {
+    margin: 5px 0;
+    font-size: 16px;
+}

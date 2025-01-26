@@ -1,6 +1,7 @@
 - name: Desktop Milling Machine
-  details: "A high-precision desktop CNC milling machine for small-scale manufacturing."
-  image: "/assets/img/desktop_milling_machine.jpg"
+  details: "A compact milling machine designed for high-precision work."
+  image_thumbnail: "/assets/img/projects/desktop_mill_thumb.jpg"
+  image_expanded: "/assets/img/projects/desktop_mill_full.jpg"
   specifications:
     - label: Spindle Speed
       value: 24,000 RPM
@@ -10,8 +11,9 @@
       value: ± 0.01mm
 
 - name: Aerostatic Bearing Spindle
-  details: "A high-speed turning spindle with aerostatic bearings for ultra-low friction performance in collaboration with CMTI."
-  image: "/assets/img/aerostatic_spindle.jpg"
+  details: "A high-speed aerostatic spindle designed for ultra-precision turning."
+  image_thumbnail: "/assets/img/projects/aerostatic_spindle_thumb.jpg"
+  image_expanded: "/assets/img/projects/aerostatic_spindle_full.jpg"
   specifications:
     - label: Max Speed
       value: 12,000 RPM
@@ -23,8 +25,9 @@
       value: 150 N/µ
 
 - name: Tabletop 4-Axis Milling Machine
-  details: "A compact 4-axis milling machine for prototyping developed with Max Automation Bengalurur."
-  image: "/assets/img/tabletop_4axis_milling.jpg"
+  details: "A powerful 4-axis CNC milling machine designed for small workshops."
+  image_thumbnail: "/assets/img/projects/tabletop_mill_thumb.jpg"
+  image_expanded: "/assets/img/projects/tabletop_mill_full.jpg"
   specifications:
     - label: Axis Configuration
       value: X, Y, Z, B (Rotary)

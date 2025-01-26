@@ -2,38 +2,29 @@
 <section id="projects" class="content-section text-center">
   <div class="projects-section">
     <div class="container">
-      <div class="col-lg-8 col-lg-offset-2">
+      <div class="col-lg-10 col-lg-offset-1">
         <h2>Ongoing Projects</h2>
-        <div class="case-study-gallery">
+        <div class="projects-grid">
           {% for project in site.data.projects %}
           <div class="project-wrapper">
-            <!-- Project Image -->
-            <div class="case-study study{{ forloop.index }}" data-index="{{ forloop.index }}" onclick="toggleProjectDetails({{ forloop.index }})">
-              <img class="project-image" src="{{ project.image | absolute_url }}" alt="{{ project.name }}">
+            <!-- Project Thumbnail -->
+            <div class="case-study project-thumbnail" data-index="{{ forloop.index }}" onclick="openProject({{ forloop.index }})">
+              <img src="{{ project.image_thumbnail }}" alt="{{ project.name }}">
               <div class="case-study__overlay">
                 <h2 class="case-study__title">{{ project.name }}</h2>
                 <span class="case-study__link">Click to Expand</span>
               </div>
             </div>
-
-            <!-- Project Details (Initially Hidden) -->
-            <div id="project-details-{{ forloop.index }}" class="project-details">
-              <h3>{{ project.name }}</h3>
-              <p>{{ project.details }}</p>
-              
-              <!-- Specifications -->
-              {% if project.specifications %}
-              <ul class="project-specs">
-                {% for spec in project.specifications %}
-                <li><strong>{{ spec.label }}:</strong> {{ spec.value }}</li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-
-              <button onclick="toggleProjectDetails({{ forloop.index }})" class="close-details">Close</button>
-            </div>
           </div>
           {% endfor %}
+        </div>
+
+        <!-- Expanded Project Details -->
+        <div id="expanded-project" class="project-details">
+          <img id="expanded-image" src="" alt="">
+          <h3 id="expanded-title"></h3>
+          <p id="expanded-description"></p>
+          <ul id="expanded-specifications"></ul>
         </div>
       </div>
     </div>
