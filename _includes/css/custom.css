@@ -624,3 +624,10 @@ button[type="submit"]:hover {
     margin: 5px 0;
     font-size: 16px;
 }
+
+.case-study-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
