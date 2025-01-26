@@ -1,7 +1,7 @@
 - name: Desktop Milling Machine
   details: "A compact milling machine designed for high-precision work."
-  image_thumbnail: "/assets/img/projects/desktop_mill_thumb.jpg"
-  image_expanded: "/assets/img/projects/desktop_mill_full.jpg"
+  image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/desktop_mill_thumb.jpg"
+  image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/desktop_mill_full.jpg"
   specifications:
     - label: Spindle Speed
       value: 24,000 RPM
@@ -12,8 +12,8 @@
 
 - name: Aerostatic Bearing Spindle
   details: "A high-speed aerostatic spindle designed for ultra-precision turning."
-  image_thumbnail: "/assets/img/projects/aerostatic_spindle_thumb.jpg"
-  image_expanded: "/assets/img/projects/aerostatic_spindle_full.jpg"
+  image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/aerostatic_spindle_thumb.jpg"
+  image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/aerostatic_spindle_full.jpg"
   specifications:
     - label: Max Speed
       value: 12,000 RPM
@@ -26,12 +26,12 @@
 
 - name: Tabletop 4-Axis Milling Machine
   details: "A powerful 4-axis CNC milling machine designed for small workshops."
-  image_thumbnail: "/assets/img/projects/tabletop_mill_thumb.jpg"
-  image_expanded: "/assets/img/projects/tabletop_mill_full.jpg"
+  image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_thumb.jpg"
+  image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_full.jpg"
   specifications:
     - label: Axis Configuration
       value: X, Y, Z, B (Rotary)
     - label: Controller
       value: Custom LinuxCNC
     - label: Axes resolution
-      value: ± 15µ with absolute linear scale
+      value: ± 15µ with absolute linear scales
