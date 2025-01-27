@@ -4,7 +4,7 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-// jQuery to collapse the navbar on scroll
+// ✅ Navbar Collapse on Scroll
 $(window).scroll(function() {
     if ($(".navbar").offset().top > 50) {
         $(".navbar-fixed-top").addClass("top-nav-collapse");
@@ -13,7 +13,7 @@ $(window).scroll(function() {
     }
 });
 
-// Smooth scrolling for anchor links
+// ✅ Smooth Scrolling
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("a.page-scroll").forEach(anchor => {
         anchor.addEventListener("click", function (event) {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const target = document.querySelector(this.getAttribute("href"));
             if (target) {
                 window.scrollTo({
-                    top: target.offsetTop - 50, // Adjust offset if needed
+                    top: target.offsetTop - 50,
                     behavior: "smooth"
                 });
             }
@@ -29,17 +29,71 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Closes the Responsive Menu on Menu Item Click
+// ✅ Close Mobile Navbar on Link Click
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
 
-// Remove the focused state after clicking, otherwise Bootstrap will still highlight the link
+// ✅ Remove Focus Highlight on Click
 $("a").mouseup(function() {
     $(this).blur();
 });
 
-// Handle form submission with success/error modals
+// ============================================
+// ✅ Projects Quick Look Pop-up
+// ============================================
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Project Quick Look JS Loaded");
+
+    document.querySelectorAll(".project-thumbnail").forEach(thumbnail => {
+        thumbnail.addEventListener("click", function () {
+            var index = this.getAttribute("data-index");
+            openProject(index);
+        });
+    });
+
+    // Close pop-up when clicking outside the content
+    document.getElementById("quicklook-overlay").addEventListener("click", function (event) {
+        if (event.target === this) {
+            closeQuicklook();
+        }
+    });
+});
+
+function openProject(index) {
+    var selectedProject = projectsData[index - 1];
+
+    if (!selectedProject) {
+        console.error("No project found for index:", index);
+        return;
+    }
+
+    console.log("Opening project:", selectedProject.name);
+
+    // Set new details
+    document.getElementById("quicklook-image").src = selectedProject.image_expanded;
+    document.getElementById("quicklook-title").innerText = selectedProject.name;
+    document.getElementById("quicklook-description").innerText = selectedProject.details;
+
+    var specsList = document.getElementById("quicklook-specifications");
+    specsList.innerHTML = ""; // Clear old specifications
+    selectedProject.specifications.forEach(spec => {
+        let listItem = document.createElement("li");
+        listItem.innerHTML = `<strong>${spec.label}:</strong> ${spec.value}`;
+        specsList.appendChild(listItem);
+    });
+
+    // Show the pop-up
+    document.getElementById("quicklook-overlay").classList.add("show");
+}
+
+function closeQuicklook() {
+    document.getElementById("quicklook-overlay").classList.remove("show");
+}
+
+// ============================================
+// ✅ Form Submission Handling with Success Modal
+// ============================================
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".contact-form-wrapper form");
     if (form) {
@@ -66,55 +120,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Function to close modals
+// ✅ Close Modal on Click
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
 }
 
-// Handle Project Expansion
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".project-thumbnail").forEach(thumbnail => {
-        thumbnail.addEventListener("click", function () {
-            var index = this.getAttribute("data-index");
-            openProject(index);
-        });
-    });
-});
-
-function openProject(index) {
-    // Hide all existing project details
-    document.querySelectorAll(".project-details").forEach(details => {
-        details.style.display = "none";
-    });
-
-    // Reset all thumbnails
-    document.querySelectorAll(".project-thumbnail").forEach(thumb => {
-        thumb.style.opacity = "1";
-    });
-
-    // Select the current project details
-    var selectedDetails = document.getElementById("project-details-" + index);
-    if (selectedDetails) {
-        selectedDetails.style.display = "block";
-        selectedDetails.scrollIntoView({ behavior: "smooth" });
-
-        // Hide the clicked thumbnail
-        var selectedThumbnail = document.querySelector(".case-study.study" + index);
-        if (selectedThumbnail) {
-            selectedThumbnail.style.opacity = "0"; // Hide the thumbnail
-        }
-    }
-}
-
-// Maps Section: Control Zoom Behavior
+// ============================================
+// ✅ Map with Scroll Zoom Only When Holding ⌘/Ctrl
+// ============================================
 document.addEventListener("DOMContentLoaded", function () {
     var mapContainer = document.getElementById("map");
 
     if (mapContainer) {
         var map = L.map('map', {
-            center: [12.2958, 76.6394], // Mysore City
+            center: [12.2958, 76.6394],
             zoom: 13,
-            scrollWheelZoom: false // Disable zooming by default
+            scrollWheelZoom: false // Disable scroll zoom initially
         });
 
         // Enable zoom only when Command (⌘) or Ctrl is pressed

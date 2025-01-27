@@ -1,5 +1,5 @@
 - name: Desktop Milling Machine
-  details: "A compact milling machine designed for high-precision work."
+  details: "A compact milling machine designed for small precision work."
   image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/desktop_mill_thumb.jpg"
   image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/desktop_mill_full.jpg"
   specifications:
@@ -11,7 +11,7 @@
       value: ± 0.01mm
 
 - name: Aerostatic Bearing Spindle
-  details: "A high-speed aerostatic spindle designed for ultra-precision turning."
+  details: "A high-speed aerostatic spindle designed for ultra-precision turning in collaboration with CMTI Bengaluru."
   image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/aerostatic_spindle_thumb.jpg"
   image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/aerostatic_spindle_full.jpg"
   specifications:
@@ -25,7 +25,7 @@
       value: 150 N/µ
 
 - name: Tabletop 4-Axis Milling Machine
-  details: "A powerful 4-axis CNC milling machine designed for small workshops."
+  details: "A powerful 4-axis CNC milling machine designed with Max Auto Cables Bengaluru for high speed milling in a compact footprint."
   image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_thumb.jpg"
   image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_full.jpg"
   specifications:
