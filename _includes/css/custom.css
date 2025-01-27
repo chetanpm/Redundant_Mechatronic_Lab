@@ -508,6 +508,7 @@ button[type="submit"]:hover {
     transform: scale(1.05); /* Slight Zoom Effect */
 }
 
+
 /* Modal Content */
 .modal-content {
     background-color: #fff;
