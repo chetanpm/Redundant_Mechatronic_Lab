@@ -1,8 +1,11 @@
 /*!
- * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ * Redundant Mechatronic Lab - Custom Styles
+ * Optimized for performance and maintainability
  */
+
+/* ============================= */
+/* ✅ Global Styles */
+/* ============================= */
 
 body {
     width: 100%;
@@ -15,17 +18,14 @@ body {
 html {
     width: 100%;
     height: 100%;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 0 0 35px;
     text-transform: uppercase;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-family: inherit;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -44,43 +44,25 @@ p {
     }
 }
 
-@media (min-width: 564px) {
-  body {
-    z-index: 564; } }
-@media (min-width: 768px) {
-  body {
-    font-size: 14px;
-    line-height: 28px;
-    z-index: 768; } }
-@media (min-width: 964px) {
-  body {
-    z-index: 964; } }
-@media (min-width: 1124px) {
-  body {
-    z-index: 1124; } }
-
+/* ✅ Links */
 a {
     color: {{ site.color.links }};
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
 
-a:hover,
-a:focus {
+a:hover, a:focus {
     text-decoration: none;
     color: #11505d;
 }
 
-.light {
-    font-weight: 400;
-}
+/* ============================= */
+/* ✅ Navigation */
+/* ============================= */
 
 .navbar-custom {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     background-color: {{ site.color.primary-dark }};
 }
 
@@ -88,527 +70,236 @@ a:focus {
     font-weight: 700;
 }
 
-.navbar-custom .navbar-brand:focus {
-    outline: 0;
-}
-
-.navbar-custom .navbar-brand .navbar-toggle {
-    padding: 4px 6px;
-    font-size: 16px;
-    color: #fff;
-}
-
-.navbar-custom .navbar-brand .navbar-toggle:focus,
-.navbar-custom .navbar-brand .navbar-toggle:active {
-    outline: 0;
-}
-
 .navbar-custom a {
     color: #fff;
 }
 
-.navbar-custom .nav li.active {
-    outline: none;
-    background-color: rgba(255,255,255,.3);
-}
-
-.navbar-custom .nav li a {
-    -webkit-transition: background .3s ease-in-out;
-    -moz-transition: background .3s ease-in-out;
-    transition: background .3s ease-in-out;
-}
-
-.navbar-custom .nav li a:hover,
-.navbar-custom .nav li a:focus,
-.navbar-custom .nav li a.active {
-    outline: 0;
-    background-color: rgba(255,255,255,.3);
+.navbar-custom a:hover,
+.navbar-custom a:focus {
+    color: #E54A53 !important; /* ✅ Change hover color to red */
+    background-color: transparent;
 }
 
 @media(min-width:767px) {
     .navbar {
         padding: 20px 0;
         border-bottom: 0;
-        letter-spacing: 1px;
-        background: 0 0;
-        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out, padding .5s ease-in-out;
     }
 
     .top-nav-collapse {
         padding: 0;
         background-color: {{ site.color.primary-dark }};
     }
-
-    .navbar-custom.top-nav-collapse {
-        border-bottom: 1px solid rgba(255,255,255,.3);
-    }
 }
+
+/* ============================= */
+/* ✅ Header Section */
+/* ============================= */
 
 .intro {
-    display: table;
-    width: 100%;
-    height: 100%;
-    padding: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     text-align: center;
     color: #fff;
-    background: url({{ site.baseurl }}/assets/img/sky-min.jpg) no-repeat bottom center scroll;
+    background: url({{ site.baseurl }}/assets/img/sky-min.jpg) no-repeat center center;
     background-color: {{ site.color.primary-dark }};
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
     background-size: cover;
-    -o-background-size: cover;
+    scroll-snap-align: start;
 }
 
-.intro .intro-body {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.intro .intro-body .brand-heading {
-    font-size: 40px;
-}
-
-.intro .intro-body .intro-text {
-    font-size: 18px;
-}
-
-@media(min-width:767px) {
-    .intro {
-        height: 100%;
-        padding: 0;
-    }
-
-    .intro .intro-body .brand-heading {
-        font-size: 100px;
-    }
-
-    .intro .intro-body .intro-text {
-        font-size: 25px;
-    }
-}
-
-.btn-circle {
-    width: 70px;
-    height: 70px;
-    margin-top: 15px;
-    padding: 7px 16px;
-    border: 2px solid white !important; /* Explicit white border */
-    border-radius: 50%;
-    font-size: 40px;
-    color: white;
-    background: transparent;
-    -webkit-transition: background 0.3s ease-in-out;
-    -moz-transition: background 0.3s ease-in-out;
-    transition: background 0.3s ease-in-out;
-}
-
-
-
-.btn-circle:hover,
-.btn-circle:focus {
-    outline: 0;
-    color: #E54A53;
-    background: rgba(255,255,255,.1);
-}
-
-.btn-circle i.animated {
-    -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 1s;
-    -moz-transition-property: -moz-transform;
-    -moz-transition-duration: 1s;
-}
-
-.btn-circle:hover i.animated {
-    -webkit-animation-name: pulse;
-    -moz-animation-name: pulse;
-    -webkit-animation-duration: 1.5s;
-    -moz-animation-duration: 1.5s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-timing-function: linear;
-}
-
-@-webkit-keyframes pulse {
-    0 {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-
-    50% {
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-}
-
-@-moz-keyframes pulse {
-    0 {
-        -moz-transform: scale(1);
-        transform: scale(1);
-    }
-
-    50% {
-        -moz-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-
-    100% {
-        -moz-transform: scale(1);
-        transform: scale(1);
-    }
-}
-
-.content-section {
-    padding-top: 100px;
-}
-
-.case-study {
-    position: relative;
-    display: block;
-    width: 90%;
-    height: auto;
-    margin: 20px auto;
-    background-size: cover;
-    border-radius: 10px;
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
-}
-
-.project-image {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.project-details {
-    display: none;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
-
-.project-details ul {
-    list-style: none;
-    padding: 0;
-}
-
-.project-details ul li {
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.close-details {
-    margin-top: 10px;
-    padding: 8px 16px;
-    border: none;
-    background-color: #E54A53;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.close-details:hover {
-    background-color: #c0392b;
-}
-
-#map {
-    width: 100%;
-    height: 200px;
-    margin-top: 100px;
-}
-
-@media(min-width:767px) {
-    .content-section {
-        padding-top: 200px;
-    }
-
-    .download-section {
-        padding: 100px 0;
-    }
-
-    #map {
-        height: 400px;
-        margin-top: 250px;
-    }
-}
-
-.btn {
-    text-transform: uppercase;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-weight: 400;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-}
-
-.btn-default {
-    border: 1px solid {{ site.color.links }};
-    color: {{ site.color.links }};
-    background-color: transparent !important;
-}
-
-.btn-default:hover,
-.btn-default:focus {
-    border: 1px solid {{ site.color.links }};
-    outline: 0;
-    color: {{ site.color.primary-dark }};
-    background-color: {{ site.color.links }};
-}
-
-ul.banner-social-buttons {
-    margin-top: 0;
-}
-
-ul.banner-social-buttons li {
-    margin-bottom: 15px;
-}
-
-@media(max-width:1199px) {
-    ul.banner-social-buttons {
-        margin-top: 15px;
-    }
-}
-
-@media(max-width:767px) {
-    ul.banner-social-buttons li {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    ul.banner-social-buttons li:last-child {
-        margin-bottom: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .btn-circle {
-        border: 2px solid white !important;
-    }
-}
-
-footer {
-    padding: 50px 0;
-}
-
-footer p {
-    margin: 0;
-}
-
-.foot-note {
-  font-size: 10px;
-}
-
-::-moz-selection {
-    text-shadow: none;
-    background: #fcfcfc;
-    background: rgba(255,255,255,.2);
-}
-
-::selection {
-    text-shadow: none;
-    background: #fcfcfc;
-    background: rgba(255,255,255,.2);
-}
-
-img::selection {
-    background: 0 0;
-}
-
-img::-moz-selection {
-    background: 0 0;
-}
-
-body {
-    webkit-tap-highlight-color: rgba(255,255,255,.2);
-}
+/* ============================= */
+/* ✅ About Section */
+/* ============================= */
 
 .slogan {
-  color: #E59B4A;
+    color: #E59B4A;
 }
 
-.page-scroll.about {
-  border-bottom: 2px solid #21E1DD;
+/* ============================= */
+/* ✅ Project Grid & Quick Look Pop-up */
+/* ============================= */
+
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
-.page-scroll.works {
-  border-bottom: 2px solid white;
+.project-wrapper {
+    flex: 1 1 30%;
+    min-width: 300px;
+    max-width: 400px;
 }
 
-.page-scroll.contact {
-  border-bottom: 2px solid #21E1DD;
+.project-thumbnail {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Gallery */
-.gallery {
-	margin-top: 30px;
+.project-thumbnail img {
+    width: 100%;
+    border-radius: 8px;
 }
 
-.gallery img:hover {
-	opacity: 0.4;
+.project-thumbnail:hover {
+    transform: scale(1.05);
 }
 
+/* ✅ Ensure Projects Have Scroll Button */
+#projects {
+    position: relative;
+}
+
+#projects .btn-circle {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ✅ Quick Look Pop-up */
+.quicklook-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.quicklook-overlay.show {
+    display: flex;
+}
+
+.quicklook-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    transition: transform 0.3s ease-in-out;
+}
+
+.quicklook-overlay.show .quicklook-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ✅ Close Button */
+.quicklook-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #E54A53;
+    cursor: pointer;
+}
+
+/* ✅ Ensure Project Details Text is Black */
+.quicklook-content h3,
+.quicklook-content p,
+.quicklook-content ul li {
+    color: black !important;
+    text-align: center;
+}
+
+/* ============================= */
+/* ✅ Form Styling */
+/* ============================= */
 
 .contact-form-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     text-align: center;
+    width: 100%;
 }
 
 .contact-form-wrapper form {
     max-width: 600px;
     width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
 }
 
-/* Modal Background */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
+/* ✅ Form Inputs & Select Box */
+.contact-form-wrapper input,
+.contact-form-wrapper textarea,
+.contact-form-wrapper select {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    color: black;
 }
 
-button[type="submit"] {
-    background-color: #444; /* Dark Grey Background */
-    color: white; /* White Text */
+/* ✅ Input Glow Effect */
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus,
+.contact-form-wrapper select:focus {
+    border: 2px solid #007DAC;
+    box-shadow: 0 0 10px rgba(33, 225, 221, 0.8);
+    background: #f9f9f9;
+    outline: none;
+    color: black;
+}
+
+/* ✅ Placeholder Text */
+.contact-form-wrapper input::placeholder,
+.contact-form-wrapper textarea::placeholder {
+    color: #666;
+}
+
+/* ✅ Submit Button */
+.send-btn {
+    background-color: #444;
+    color: white;
     border: none;
     padding: 12px 24px;
     font-size: 16px;
     text-transform: uppercase;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease-in-out, transform 0.1s ease-in-out;
-    border-radius: 5px; /* Slightly Rounded Corners */
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border-radius: 5px;
     display: inline-block;
+    width: 100%;
 }
 
-button[type="submit"]:hover {
-    background-color: #E54A53; /* Red on Hover */
-    color: white;
-    transform: scale(1.05); /* Slight Zoom Effect */
-}
-
-
-/* Modal Content */
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    text-align: center;
-    color: #333;
-}
-
-/* Close Button */
-.modal-content button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007DAC;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.modal-content button:hover {
-    background-color: #005f8c;
-}
-
-.project-details {
-    display: none; /* Hide initially */
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    margin-top: 15px;
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
-
-.project-details img {
-    max-width: 80%;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 5px;
-}
-
-.close-details {
-    margin-top: 10px;
-    padding: 5px 15px;
-    border: none;
+/* ✅ Button Hover Effect */
+.send-btn:hover {
     background-color: #E54A53;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+    transform: scale(1.05);
 }
 
-.close-details:hover {
-    background-color: #c0392b;
-}
-
-/* ============================= */
-/* ✅ Form Styling - Restore Focus Highlight */
-/* ============================= */
-
-input,
-textarea {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background 0.5s ease-in-out, border 0.3s ease-in-out;
-}
-
-input:focus,
-textarea:focus {
-    background: #21E1DD; /* Turquoise blue highlight */
-    border: 2px solid #007DAC; /* Darker blue border */
-    outline: none;
-    color: #fff; /* White text on focus */
-}
-
-/* ✅ Fix Form Text Color */
-.contact-form-wrapper input,
-.contact-form-wrapper textarea {
-    color: black !important; /* ✅ Ensure form text is black */
-    background-color: white; /* ✅ White background for better contrast */
-}
-
-/* ✅ Placeholder Text Color */
-.contact-form-wrapper input::placeholder,
-.contact-form-wrapper textarea::placeholder {
-    color: #666; /* ✅ Light gray placeholder for contrast */
-}
-
-/* ✅ Focus Styling */
-.contact-form-wrapper input:focus,
-.contact-form-wrapper textarea:focus {
-    background: #f9f9f9; /* ✅ Slight gray tint on focus */
-    border: 2px solid #007DAC; /* ✅ Blue border on focus */
-    outline: none;
-    color: black; /* ✅ Ensure text remains visible */
+/* ✅ Responsive Form Adjustments */
+@media (max-width: 768px) {
+    .contact-form-wrapper form {
+        width: 90%;
+    }
 }
 
 /* ============================= */
@@ -636,120 +327,106 @@ textarea:focus {
     color: #333;
 }
 
-.modal-content button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007DAC;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.modal-content button:hover {
-    background-color: #005f8c;
-}
-
 /* ============================= */
-/* ✅ Project Quick Look Popup */
+/* ✅ Map Section */
 /* ============================= */
 
-.case-study-gallery {
+/* ============================= */
+/* ✅ Map Section - Responsive Fix */
+/* ============================= */
+
+#map-section {
+    width: 100vw; /* ✅ Full width */
+    height: 100vh; /* ✅ Full viewport height */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centers the projects */
-    gap: 20px;
+    flex-direction: column; /* ✅ Title stays above map */
+    align-items: center;
+    justify-content: flex-start; /* ✅ Ensures title is at the top */
+    scroll-snap-align: start;
+    padding-top: 80px; /* ✅ Adjust for navbar height */
 }
 
-.project-wrapper {
-    flex: 1 1 30%; /* Ensures 3 projects fit in one row */
-    min-width: 300px;
-    max-width: 400px;
+#map-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 15px; /* ✅ Space between title and map */
+    text-align: center;
+    padding: 20px 0;
 }
 
-.project-thumbnail {
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
-
-.project-thumbnail img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.project-thumbnail:hover {
-    transform: scale(1.05);
-}
-
-/* ✅ Quick Look Pop-up */
-.quicklook-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+#map-container {
+    width: 90vw; /* ✅ Adjusted width for aesthetics */
+    height: calc(100vh - 150px); /* ✅ Ensures map takes remaining space */
+    max-height: 600px; /* ✅ Prevents map from becoming too large */
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
 }
 
-.quicklook-overlay.show {
-    display: flex;
-}
-
-.quicklook-overlay.show .quicklook-content {
-    transform: scale(1);
-}
-
-.quicklook-content img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-/* ✅ Close Button */
-.quicklook-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 30px;
-    color: #E54A53;
-    cursor: pointer;
-}
-
-/* ✅ Quick Look Pop-up (Centered & Compact) */
-.quicklook-content {
-    background: white;
-    padding: 20px;
+#map {
+    width: 100%; /* ✅ Map fills container */
+    height: 100%; /* ✅ Map takes full container height */
+    min-height: 300px; /* ✅ Prevents map from collapsing */
     border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================= */
+/* ✅ Footer */
+/* ============================= */
+
+footer {
+    padding: 50px 0;
     text-align: center;
-    max-width: 50%;
-    width: 500px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transform: scale(0.9);
-    transition: transform 0.3s ease-in-out;
-    color: black; /* ✅ Ensure all text is black */
 }
 
-/* ✅ Ensure the Project Details Text is Black */
-.quicklook-content h3,
-.quicklook-content p {
-    color: black !important; /* ✅ Force black text */
+/* ============================= */
+/* ✅ Miscellaneous */
+/* ============================= */
+
+/* ✅ Gallery Hover Effect */
+.gallery img:hover {
+    opacity: 0.4;
 }
 
-/* ✅ Project Specifications (Below Image) */
-.quicklook-content ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-    color: black; /* ✅ Ensure visibility */
+/* ✅ Button Animations */
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid white !important;
+    border-radius: 50%;
+    font-size: 40px;
+    color: white;
+    background: transparent;
+    transition: background 0.3s ease-in-out;
 }
 
-.quicklook-content ul li {
-    margin: 5px 0;
-    font-size: 16px;
-    color: black; /* ✅ Ensure readability */
+.btn-circle:hover {
+    color: #E54A53;
+    background: rgba(255,255,255,.1);
+}
+
+/* ============================= */
+/* ✅ Full-Screen Sections */
+/* ============================= */
+
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+
+#footer-section {
+    min-height: 100vh; /* ✅ Full screen height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
 }

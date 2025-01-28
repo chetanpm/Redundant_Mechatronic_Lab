@@ -1,31 +1,59 @@
-<!-- Contact Form -->
+<!-- Contact Section -->
 <section id="contact" class="container content-section text-center">
     <div class="contact-form-wrapper">
+        <h2>Get in Touch</h2>
+        <p>Interested in our projects or have a custom inquiry? Fill out the form below, and we'll get back to you.</p>
+
         <form action="https://formsubmit.co/redundantlab@pm.me" method="POST">
             <input type="hidden" name="_next" value="">
             <input type="hidden" name="_captcha" value="false">
-    
-            <div>
+
+            <!-- Full Name -->
+            <div class="form-group">
                 <label for="name">Full Name <span>*</span></label>
                 <input type="text" id="name" name="name" placeholder="Your Full Name" required>
             </div>
-    
-            <div>
+
+            <!-- Email -->
+            <div class="form-group">
                 <label for="email">Email Address <span>*</span></label>
                 <input type="email" id="email" name="email" placeholder="Your Email Address" required>
             </div>
-    
-            <div>
+
+            <!-- Inquiry Subject (Dynamically Populated) -->
+            <div class="form-group">
+                <label for="subject">Inquiry Subject <span>*</span></label>
+                <select id="subject" name="subject" required onchange="toggleCustomSubject()">
+                    <option value="" disabled selected>Select a Project</option>
+                    {% for project in site.data.projects %}
+                        <option value="{{ project.name }}">{{ project.name }}</option>
+                    {% endfor %}
+                    <option value="Other">Other (Specify Below)</option>
+                </select>
+            </div>
+
+            <!-- Custom Subject (Hidden by Default) -->
+            <div class="form-group" id="custom-subject-container" style="display: none;">
+                <label for="custom-subject">Custom Inquiry</label>
+                <input type="text" id="custom-subject" name="custom-subject" placeholder="Specify Your Inquiry">
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
                 <label for="message">Message <span>*</span></label>
                 <textarea id="message" name="message" placeholder="Tell us about your requirement" rows="5" required></textarea>
             </div>
-    
+
+            <!-- Submit Button -->
             <div>
-                <button type="submit">Send Message</button>
+                <button type="submit" class="send-btn">Send Message</button>
             </div>
         </form>
+        <a href="#map-section" class="btn btn-circle page-scroll bounce">
+            <i class="fa fa-angle-double-down animated"></i>
+        </a>
     </div>
-    
+
     <!-- Success Popup Modal -->
     <div id="successModal" class="modal">
         <div class="modal-content">
@@ -33,7 +61,7 @@
             <button onclick="closeModal('successModal')">OK</button>
         </div>
     </div>
-    
+
     <!-- Error Popup Modal -->
     <div id="errorModal" class="modal">
         <div class="modal-content">
@@ -42,3 +70,16 @@
         </div>
     </div>
 </section>
+
+<script>
+function toggleCustomSubject() {
+    var subjectDropdown = document.getElementById("subject");
+    var customSubjectContainer = document.getElementById("custom-subject-container");
+
+    if (subjectDropdown.value === "Other") {
+        customSubjectContainer.style.display = "block";
+    } else {
+        customSubjectContainer.style.display = "none";
+    }
+}
+</script>

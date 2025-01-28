@@ -13,19 +13,21 @@ $(window).scroll(function() {
     }
 });
 
-// ✅ Smooth Scrolling
+// ✅ Smooth Scrolling with Section Navigation
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("a.page-scroll").forEach(anchor => {
         anchor.addEventListener("click", function (event) {
             event.preventDefault();
             const target = document.querySelector(this.getAttribute("href"));
             if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 50,
-                    behavior: "smooth"
-                });
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
+    });
+
+    // Ensure header section is reachable
+    document.querySelector(".btn-circle").addEventListener("click", function () {
+        document.querySelector("#about").scrollIntoView({ behavior: "smooth", block: "start" });
     });
 });
 
@@ -40,56 +42,45 @@ $("a").mouseup(function() {
 });
 
 // ============================================
-// ✅ Projects Quick Look Pop-up
+// ✅ Projects Quick Look Pop-up (Centered)
 // ============================================
+
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Project Quick Look JS Loaded");
+    var quicklookOverlay = document.getElementById("quicklook-overlay");
+    var quicklookClose = document.querySelector(".quicklook-close");
 
-    document.querySelectorAll(".project-thumbnail").forEach(thumbnail => {
-        thumbnail.addEventListener("click", function () {
-            var index = this.getAttribute("data-index");
-            openProject(index);
+    function openProject(index) {
+        var project = projectsData[index - 1];
+        if (!project) return;
+
+        document.getElementById("quicklook-title").innerText = project.name;
+        document.getElementById("quicklook-description").innerText = project.details;
+        document.getElementById("quicklook-image").src = project.image_expanded;
+
+        // Show specifications
+        var specsList = document.getElementById("quicklook-specifications");
+        specsList.innerHTML = "";
+        project.specifications.forEach(spec => {
+            let listItem = document.createElement("li");
+            listItem.innerHTML = `<strong>${spec.label}:</strong> ${spec.value}`;
+            specsList.appendChild(listItem);
         });
-    });
 
-    // Close pop-up when clicking outside the content
-    document.getElementById("quicklook-overlay").addEventListener("click", function (event) {
-        if (event.target === this) {
-            closeQuicklook();
-        }
-    });
-});
-
-function openProject(index) {
-    var selectedProject = projectsData[index - 1];
-
-    if (!selectedProject) {
-        console.error("No project found for index:", index);
-        return;
+        quicklookOverlay.classList.add("show");
     }
 
-    console.log("Opening project:", selectedProject.name);
-
-    // Set new details
-    document.getElementById("quicklook-image").src = selectedProject.image_expanded;
-    document.getElementById("quicklook-title").innerText = selectedProject.name;
-    document.getElementById("quicklook-description").innerText = selectedProject.details;
-
-    var specsList = document.getElementById("quicklook-specifications");
-    specsList.innerHTML = ""; // Clear old specifications
-    selectedProject.specifications.forEach(spec => {
-        let listItem = document.createElement("li");
-        listItem.innerHTML = `<strong>${spec.label}:</strong> ${spec.value}`;
-        specsList.appendChild(listItem);
+    quicklookClose.addEventListener("click", function () {
+        quicklookOverlay.classList.remove("show");
     });
 
-    // Show the pop-up
-    document.getElementById("quicklook-overlay").classList.add("show");
-}
+    quicklookOverlay.addEventListener("click", function (event) {
+        if (event.target === quicklookOverlay) {
+            quicklookOverlay.classList.remove("show");
+        }
+    });
 
-function closeQuicklook() {
-    document.getElementById("quicklook-overlay").classList.remove("show");
-}
+    window.openProject = openProject;
+});
 
 // ============================================
 // ✅ Form Submission Handling with Success Modal
@@ -135,10 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var map = L.map('map', {
             center: [12.2958, 76.6394],
             zoom: 13,
-            scrollWheelZoom: false // Disable scroll zoom initially
+            scrollWheelZoom: false
         });
 
-        // Enable zoom only when Command (⌘) or Ctrl is pressed
         document.addEventListener("keydown", function (event) {
             if (event.metaKey || event.ctrlKey) {
                 map.scrollWheelZoom.enable();
@@ -151,27 +141,22 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add Marker with Popup
         var marker = L.marker([12.2958, 76.6394]).addTo(map)
             .bindPopup("<b>Redundant Mechatronic Lab</b><br>Mysore City<br><small>Click to open in Google Maps</small>")
             .openPopup();
 
-        // Tooltip for better visibility
         marker.bindTooltip("Click to open Google Maps", { direction: "top", permanent: false, opacity: 0.8 });
 
-        // Clickable marker to open Google Maps
         marker.on('click', function() {
             window.open("https://www.google.com/maps/search/?api=1&query=12.2958,76.6394", "_blank");
         });
 
-        // Add instruction text for zoom behavior
         var zoomInstruction = document.createElement("div");
-        zoomInstruction.innerHTML = "Hold ⌘ (Mac) or Ctrl (Windows) to zoom";
+        zoomInstruction.innerHTML = "Hold ⌘ or Ctrl to zoom";
         zoomInstruction.style.position = "absolute";
         zoomInstruction.style.bottom = "10px";
         zoomInstruction.style.right = "10px";
