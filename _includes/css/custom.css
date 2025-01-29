@@ -126,7 +126,7 @@ a:hover, a:focus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 5vh;
 }
 
 .project-wrapper {
@@ -153,13 +153,6 @@ a:hover, a:focus {
 /* ✅ Ensure Projects Have Scroll Button */
 #projects {
     position: relative;
-}
-
-#projects .btn-circle {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 /* ✅ Quick Look Pop-up */
@@ -200,7 +193,6 @@ a:hover, a:focus {
 .quicklook-overlay.show .quicklook-content {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
 }
 
 /* ✅ Close Button */
@@ -234,7 +226,7 @@ a:hover, a:focus {
 }
 
 .contact-form-wrapper form {
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
@@ -246,7 +238,7 @@ a:hover, a:focus {
 .contact-form-wrapper textarea,
 .contact-form-wrapper select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin: 8px 0;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -260,7 +252,7 @@ a:hover, a:focus {
 .contact-form-wrapper input:focus,
 .contact-form-wrapper textarea:focus,
 .contact-form-wrapper select:focus {
-    border: 2px solid #007DAC;
+    border: 4px solid #007DAC;
     box-shadow: 0 0 10px rgba(33, 225, 221, 0.8);
     background: #f9f9f9;
     outline: none;
@@ -329,10 +321,6 @@ a:hover, a:focus {
 
 /* ============================= */
 /* ✅ Map Section */
-/* ============================= */
-
-/* ============================= */
-/* ✅ Map Section - Responsive Fix */
 /* ============================= */
 
 #map-section {
