@@ -1,0 +1,27 @@
+# Automatic dependency updates (github.com/docs: "Controlling which
+# dependencies are updated by Dependabot").
+#
+# - bundler:         opens a PR when a gem in the Gemfile gets a new release
+# - github-actions:  opens a PR when an action used in the workflows is updated
+# Security updates (from Dependabot alerts) are always proposed, regardless
+# of schedule.
+#
+# Every PR it opens runs the "Checks" workflow (.github/workflows/checks.yml):
+# strict Jekyll build + site checks. A breaking gem rollout shows up as a RED
+# check on the PR — that is the warning. Do not merge red PRs.
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Wait 3 days after a release before proposing it, so obviously broken
+    # releases get flagged by other users first (supply-chain hygiene).
+    cooldown:
+      default-days: 3
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 3

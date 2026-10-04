@@ -1,0 +1,1824 @@
+/*!
+ * Redundant Mechatronic Lab - Custom Styles
+ * Optimized for performance and maintainability
+ */
+
+/* 2026-09: site improvements in this file developed with AI assistance. */
+
+/* 2026-10: theme system developed with AI assistance. */
+/* ============================= */
+/* ✅ Theme tokens — base is DARK (the original design, verbatim values).
+   LIGHT applies when <html data-theme="light"> (the nav toggle, persisted
+   in localStorage as rml-theme) or, with no stored choice, when the OS is
+   in light mode. The black navbar, the intro photo and the video zone keep
+   their look in both themes. */
+:root {
+    --bg: #000000;
+    --bg-sheet: #0B0B0D;
+    --bg-sheet-back: #060608;
+    --ink: #ffffff;
+    --ink-85: rgba(255, 255, 255, .85);
+    --ink-75: rgba(255, 255, 255, .75);
+    --ink-60: rgba(255, 255, 255, .60);
+    --ink-55: rgba(255, 255, 255, .55);
+    --ink-50: rgba(255, 255, 255, .50);
+    --ink-45: rgba(255, 255, 255, .45);
+    --line: rgba(255, 255, 255, .14);
+    --line-soft: rgba(255, 255, 255, .06);
+    --line-head: rgba(255, 255, 255, .16);
+    --sheet-shadow: rgba(0, 0, 0, .4);
+    --arrow-border: rgba(255, 255, 255, .35);
+    --arrow-bg: rgba(0, 0, 0, .35);
+    --arrow-ink: rgba(255, 255, 255, .80);
+    --ph-bg: #0a0a0a;
+    --ph-border: #3a3a3a;
+    --ph-ink: #666666;
+    --form-bg: rgba(255, 255, 255, .10);
+    --btn-bg: #444444;
+    --circle: #ffffff;
+    --hover-wash: rgba(255, 255, 255, .1);
+}
+
+:root[data-theme="light"] {
+    --bg: #fbfbfa;
+    --bg-sheet: #f2f1ef;
+    --bg-sheet-back: #e8e6e2;
+    --ink: #141414;
+    --ink-85: rgba(20, 20, 20, .90);
+    --ink-75: rgba(20, 20, 20, .78);
+    --ink-60: rgba(20, 20, 20, .65);
+    --ink-55: rgba(20, 20, 20, .60);
+    --ink-50: rgba(20, 20, 20, .55);
+    --ink-45: rgba(20, 20, 20, .50);
+    --line: rgba(0, 0, 0, .16);
+    --line-soft: rgba(0, 0, 0, .08);
+    --line-head: rgba(0, 0, 0, .22);
+    --sheet-shadow: rgba(0, 0, 0, .12);
+    --arrow-border: rgba(20, 20, 20, .35);
+    --arrow-bg: rgba(255, 255, 255, .65);
+    --arrow-ink: rgba(20, 20, 20, .85);
+    --ph-bg: #f0efed;
+    --ph-border: #c9c6c2;
+    --ph-ink: #8a8a8a;
+    --form-bg: rgba(0, 0, 0, .05);
+    --btn-bg: #141414;
+    --circle: rgba(20, 20, 20, .7);
+    --hover-wash: rgba(20, 20, 20, .08);
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+        --bg: #fbfbfa;
+        --bg-sheet: #f2f1ef;
+        --bg-sheet-back: #e8e6e2;
+        --ink: #141414;
+        --ink-85: rgba(20, 20, 20, .90);
+        --ink-75: rgba(20, 20, 20, .78);
+        --ink-60: rgba(20, 20, 20, .65);
+        --ink-55: rgba(20, 20, 20, .60);
+        --ink-50: rgba(20, 20, 20, .55);
+        --ink-45: rgba(20, 20, 20, .50);
+        --line: rgba(0, 0, 0, .16);
+        --line-soft: rgba(0, 0, 0, .08);
+        --line-head: rgba(0, 0, 0, .22);
+        --sheet-shadow: rgba(0, 0, 0, .12);
+        --arrow-border: rgba(20, 20, 20, .35);
+        --arrow-bg: rgba(255, 255, 255, .65);
+        --arrow-ink: rgba(20, 20, 20, .85);
+        --ph-bg: #f0efed;
+        --ph-border: #c9c6c2;
+        --ph-ink: #8a8a8a;
+        --form-bg: rgba(0, 0, 0, .05);
+        --btn-bg: #141414;
+        --circle: rgba(20, 20, 20, .7);
+        --hover-wash: rgba(20, 20, 20, .08);
+    }
+}
+
+/* ✅ Theme toggle (nav): a small round sun/moon at the end of the nav */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin: 10px 0 10px 8px;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    color: #E54A53 !important;
+    border-color: #E54A53;
+    background: rgba(255, 255, 255, .08);
+    text-decoration: none;
+}
+
+/* Icon = the mode you'd switch TO: sun on dark, moon on light.
+   Same inline SVGs as the brief page's toggle (FA fa-sun-o read as a gear). */
+.theme-toggle .ic-moon {
+    display: none;
+}
+
+.theme-toggle.in-light .ic-moon {
+    display: inline;
+}
+
+.theme-toggle.in-light .ic-sun {
+    display: none;
+}
+
+/* ============================= */
+/* ✅ Global Styles */
+/* ============================= */
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+/* While the paper is moving (a sheet growing / collapsing / a more
+   page nested), the snap points are in flux — snap is switched off
+   for the motion, then back. The governor owns all page moves, so
+   nothing is lost. */
+html.no-snap {
+    scroll-snap-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 35px;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+p {
+    margin: 0 0 25px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media(min-width:767px) {
+    p {
+        margin: 0 0 35px;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+}
+
+/* ✅ Links */
+a {
+    color: {{ site.color.links }};
+    transition: all .2s ease-in-out;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+    color: #11505d;
+}
+
+/* ============================= */
+/* ✅ Navigation */
+/* ============================= */
+
+.navbar-custom {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    text-transform: uppercase;
+    background-color: {{ site.color.primary-dark }};
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+}
+
+.navbar-custom a {
+    color: #fff;
+}
+
+.navbar-custom a:hover,
+.navbar-custom a:focus {
+    color: #E54A53 !important; /* ✅ Change hover color to red */
+    background-color: transparent;
+}
+
+@media(min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        border-bottom: 0;
+        transition: background .5s ease-in-out, padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+        background-color: {{ site.color.primary-dark }};
+    }
+}
+
+/* Mobile drop-down menu: solid black so the white links stay readable
+   on light-theme pages too (the bar itself is always black). */
+@media (max-width: 767px) {
+    .navbar-custom .navbar-collapse {
+        background-color: #000000;
+        border-top: 1px solid rgba(255, 255, 255, .18);
+    }
+}
+
+/* ============================= */
+/* ✅ Header Section */
+/* ============================= */
+
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    color: #fff;
+    background: url({{ site.baseurl }}/assets/img/sky-min.webp) no-repeat center center;
+    background-color: {{ site.color.primary-dark }};
+    background-size: cover;
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* one flick = exactly one page */
+}
+
+/* ============================= */
+/* ✅ About Section */
+/* ============================= */
+
+.slogan {
+    color: #E59B4A;
+}
+
+/* ============================= */
+/* ✅ Project Grid & Quick Look Pop-up */
+/* ============================= */
+
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5vh;
+}
+
+.project-wrapper {
+    flex: 1 1 30%;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.project-thumbnail {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.project-thumbnail img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.project-link {
+    display: block;
+    text-decoration: none;
+}
+
+.project-link .project-title h3 {
+    transition: color 0.3s ease-in-out;
+}
+
+.project-link:hover .project-thumbnail {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(229, 74, 83, .22);
+}
+
+.project-link:hover .project-title h3 {
+    color: #E54A53;
+}
+
+/* ✅ Missing image fallback (e.g. photos not uploaded yet) */
+.project-thumbnail.img-missing,
+.pp-media.img-missing {
+    height: 210px;
+    background: var(--ph-bg);
+    border: 1px dashed var(--ph-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-thumbnail.img-missing::after,
+.pp-media.img-missing::after {
+    content: "image coming soon";
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ph-ink);
+}
+
+/* ✅ Navigation space (fixed layer, separate from content space):
+   one circle at the SAME screen position on every page.
+   JS keeps the arrow (down = next page, up = top) and the
+   0X / 06 readout current. */
+.page-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index: 100; /* above content, below the navbar (1030) */
+}
+
+.page-ind {
+    position: fixed;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--ink-45);
+}
+
+/* ✅ Circle arrow: gentle bob (the "animated" class was dead CSS) */
+.btn-circle .fa {
+    animation: circle-bob 2.4s ease-in-out infinite;
+}
+
+.btn-circle .bob-up {
+    animation-name: circle-bob-up;
+}
+
+@keyframes circle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
+@keyframes circle-bob-up {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* ✅ Project page — a real page in the flow, folded between Projects
+   and Contact. Clicking a card unfolds it as a 3D page turn: the
+   sheet (one per project) rotates about its top edge — the fold
+   line, the seam — from 179° down to flat, like the centre page of
+   a magazine falling to reveal the hidden page. The blank back of
+   the paper is a second face (.ps-back) and a shadow sweeps out of
+   the fold line as the page lands. The printed content then settles
+   at a per-project diagonal — sheet 1 to the right, sheet 2 straight
+   down, sheet 3 to the left (a tri-fold fan). Each project carries
+   one more folded page ("More information"), attached straight
+   below its sheet; opening it folds the more page down from the
+   seam while the showcase sheet shrinks to its head strip — the
+   hidden page revealing. ‹ › at the edges fold to the neighbouring
+   project; scrolling up folds back; scrolling down continues to
+   Contact, Map, Footer.
+   All the motion is CSS transitions; JS only toggles classes
+   (.open / .closing / .nested, custom.js) and panning the frame.
+   The sheet rests flush at its own top edge (the seam, at the frame
+   top) — the same rest position as every other page, a native snap
+   point. The head (title bar) sits --nav below the seam, directly
+   under the collapsed navbar; JS sets --nav live from the measured
+   navbar height. The paper sits on a shade off the main black — the
+   folded pages have their own surface. --pp-pad-top = content
+   clearance under the head. While a more page is open, its sheet
+   shrinks to a head-only strip (nav + head) and the more page's
+   own, smaller head (--head-sm) nests flush under the first head. */
+:root {
+    --nav: 50px;
+    --head: 48px;
+    --head-sm: 40px;
+    --pp-pad-top: calc(var(--nav) + var(--head) + 2.5vh);
+    --fold-d: .9s;       /* sheet falls from the fold line */
+    --fold-up-d: .5s;    /* sheet folds back up */
+    --more-d: .7s;       /* more page falls from the seam */
+    --more-up-d: .45s;   /* more page folds back down */
+    --height-d: .55s;    /* paper growing / shrinking */
+    --paper-ease: cubic-bezier(.4, .1, .2, 1);   /* fall: fast start, soft landing */
+}
+
+#project-page {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-sheet);
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* one flick = exactly one page */
+}
+
+/* The sheet grows in place (its top edge is the seam) — the browser's
+   scroll anchoring must not re-pin the frame to content below while
+   the paper moves, or the frame would follow the contact page down. */
+#project-page *,
+.more-page * {
+    overflow-anchor: none;
+}
+
+/* While the paper is moving, no element in the document may act as a
+   scroll anchor. */
+html.no-snap body * {
+    overflow-anchor: none;
+}
+
+/* Rubber-band drag: while an edge page is displaced, the browser's
+   scroll anchoring must not "help" by re-pinning the frame to the
+   moved content (it would silently cancel the drag). */
+.no-anchor,
+.no-anchor * {
+    overflow-anchor: none;
+}
+
+/* One sheet per project. Closed: no space at all (Contact sits
+   flush against Projects, the folded pages hidden in between).
+   Open: exactly one frame. Nested: a head-only strip (nav + head)
+   while the project's more page is open. The height is the paper
+   growing; the 3D fall inside (.ps-fold) carries the theatre.
+   perspective gives the fold its depth; overflow hidden is the
+   fold line itself — the part of the page above the seam (its back,
+   mid-fold) is clipped, so the paper only ever appears from the
+   fold down. */
+.proj-sheet {
+    position: relative;
+    z-index: 1;
+    height: 0;
+    overflow: hidden;
+    perspective: 1300px;
+    transition: height var(--height-d) var(--paper-ease);
+}
+
+.proj-sheet.open {
+    height: 100vh;
+    height: 100dvh;
+}
+
+.proj-sheet.nested {
+    height: calc(var(--nav, 50px) + var(--head, 48px));
+}
+
+.proj-sheet.closing {
+    transition: height .4s var(--paper-ease);
+}
+
+/* The fold: the whole sheet, hinged at its top edge (the seam).
+   Closed it lies folded back above the fold line at 179° (clipped
+   away, visibility hidden); open it is flat at 0°. Closing runs
+   the same rotation in reverse, faster. */
+.ps-fold {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transform-origin: top center;
+    transform: rotateX(179deg);
+    visibility: hidden;
+    transition: transform var(--fold-d) var(--paper-ease);
+}
+
+.proj-sheet.open .ps-fold,
+.proj-sheet.closing .ps-fold {
+    visibility: visible;
+}
+
+.proj-sheet.open .ps-fold {
+    transform: rotateX(0deg);
+}
+
+.proj-sheet.closing .ps-fold {
+    transform: rotateX(179deg);
+    transition-duration: var(--fold-up-d);
+}
+
+/* The two faces of the sheet: the printed side (transparent — the
+   paper colour is the section behind, so the CAD trace under the
+   paper shows through) and the blank back (one shade deeper — the
+   shadow side of the page, with a faint mark for the ones who look
+   at it mid-fold). */
+.ps-front,
+.ps-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.ps-back {
+    transform: rotateX(180deg);
+    background: var(--bg-sheet-back);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pb-mark {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: .07;
+    pointer-events: none;
+}
+
+/* The paper curl: a shadow that sweeps out of the fold line as the
+   page lands, once per unfold. */
+.ps-front::before,
+.sm-front::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--sheet-shadow), transparent 45%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.proj-sheet.open .ps-front::before {
+    animation: fold-shadow var(--fold-d) var(--paper-ease) forwards;
+}
+
+.more-page.open .sm-front::before {
+    animation: fold-shadow var(--more-d) var(--paper-ease) forwards;
+}
+
+@keyframes fold-shadow {
+    0% { opacity: .55; }
+    55% { opacity: .18; }
+    100% { opacity: 0; }
+}
+
+/* ---- Page physics: the booklet is slightly viscous ----
+   Every page FITS into place with a soft bounce, and flicking past
+   the ends of the booklet rubber-bands: the edge page drags with
+   resistance and springs back elastically (the classic elastic
+   overscroll, driven by the governor in custom.js). */
+
+/* The bounce a page plays when the frame lands on it. JS adds
+   .settle to the ARRIVING page; it never runs on the project page —
+   that one has its own fold + pan choreography. */
+@keyframes page-settle {
+    0%   { transform: scale(1.015) translateY(.5vh); }
+    55%  { transform: scale(.9975) translateY(-.12vh); }
+    80%  { transform: scale(1.002) translateY(.04vh); }
+    100% { transform: none; }
+}
+
+.settle {
+    animation: page-settle .65s cubic-bezier(.3, .7, .4, 1) both;
+}
+
+/* Rubber band: while the gesture is held, JS moves the edge page
+   (inline transform, following the wheel with resistance). On
+   release this springs it home with two decaying overshoots.
+   --rb = the offset at the moment of release. */
+@keyframes rubber-back {
+    0%   { transform: translateY(var(--rb, 0)); }
+    45%  { transform: translateY(calc(var(--rb, 0) * -0.16)); }
+    72%  { transform: translateY(calc(var(--rb, 0) * 0.07)); }
+    100% { transform: translateY(0); }
+}
+
+.rubber-back {
+    animation: rubber-back .75s cubic-bezier(.3, .7, .4, 1) both;
+}
+
+/* Layer three: the CAD ground work, under the paper. A faint line
+   trace of the desktop mill's model, centred on the sheet. It draws
+   itself once the sheet area first comes into view (custom.js adds
+   .cad-drawn); with reduced motion it simply sits, already drawn.
+   Decorative only — never interactive, never above content. */
+.cad-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    pointer-events: none;
+    color: var(--ink);
+}
+
+.cad-layer svg {
+    width: min(72vw, 820px);
+    height: auto;
+    opacity: .07; /* dark theme (the base) */
+}
+
+:root[data-theme="light"] .cad-layer svg {
+    opacity: .05;
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .cad-layer svg {
+        opacity: .05;
+    }
+}
+
+.cad-layer path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke; /* hairline at any scale */
+    stroke-dasharray: 1; /* with pathLength="1" on every path */
+    stroke-dashoffset: 1; /* hidden until the draw runs */
+}
+
+.cad-layer.cad-drawn path {
+    animation: cad-draw 12s ease-in-out forwards;
+}
+
+/* a stagger, so the lines don't all start at once */
+.cad-layer.cad-drawn path:nth-of-type(2n) { animation-delay: 1.6s; }
+.cad-layer.cad-drawn path:nth-of-type(3n) { animation-delay: 3.2s; }
+.cad-layer.cad-drawn path:nth-of-type(5n) { animation-delay: 4.8s; }
+
+@keyframes cad-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cad-layer path {
+        stroke-dasharray: none;
+        stroke-dashoffset: 0;
+        animation: none;
+    }
+
+    /* No page turns, no bounces: the sheets simply appear at rest
+       (straight — the diagonal is motion only). */
+    .proj-sheet,
+    .more-page,
+    .ps-fold,
+    .sm-fold,
+    .ps-content,
+    .sm-content {
+        transition: none !important;
+    }
+
+    .ps-front::before,
+    .sm-front::before {
+        animation: none !important;
+        opacity: 0 !important;
+    }
+
+    .ps-pan,
+    .sm-content,
+    .settle,
+    .rubber-back {
+        animation: none !important;
+    }
+}
+
+/* The printed page: the content block on the sheet's paper. It is
+   narrower than the frame (the paper continues past both edges).
+   The PAGE RESTS STRAIGHT — the diagonal is the motion, not the
+   pose: while the sheet unfolds, the whole printed page (.ps-pan)
+   pans in along its card's diagonal and FITS into the frame with a
+   damped bounce (a page of slightly viscous paper coming to rest).
+   If the content ever overflows the frame it scrolls inside its
+   own page (the governor knows; the wheel hands over). */
+.ps-pan {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+}
+
+/* Per-card diagonals: the left card's page arrives from the upper
+   LEFT and pans down-RIGHT into the frame (unfolding to the right),
+   the middle straight down, the right card's mirrored. Each lands
+   with two decaying overshoots — the bounce. */
+@keyframes pan-land-1 {
+    0%   { transform: translate(-11vw, -9vh); }
+    58%  { transform: translate(1.1vw, .7vh); }
+    76%  { transform: translate(-.45vw, -.3vh); }
+    89%  { transform: translate(.18vw, .1vh); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes pan-land-2 {
+    0%   { transform: translate(0, -11vh); }
+    58%  { transform: translate(0, .9vh); }
+    76%  { transform: translate(0, -.4vh); }
+    89%  { transform: translate(0, .15vh); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes pan-land-3 {
+    0%   { transform: translate(11vw, -9vh); }
+    58%  { transform: translate(-1.1vw, .7vh); }
+    76%  { transform: translate(.45vw, -.3vh); }
+    89%  { transform: translate(-.18vw, .1vh); }
+    100% { transform: translate(0, 0); }
+}
+
+.proj-sheet.open.sheet-1 .ps-pan {
+    animation: pan-land-1 1.05s cubic-bezier(.25, .6, .35, 1) both;
+}
+
+.proj-sheet.open.sheet-2 .ps-pan {
+    animation: pan-land-2 1.05s cubic-bezier(.25, .6, .35, 1) both;
+}
+
+.proj-sheet.open.sheet-3 .ps-pan {
+    animation: pan-land-3 1.05s cubic-bezier(.25, .6, .35, 1) both;
+}
+
+.ps-content {
+    position: absolute;
+    top: var(--pp-pad-top);
+    bottom: 5vh;
+    left: 50%;
+    width: min(940px, 90vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+    transform-origin: center center;
+    transition: opacity .35s ease;
+}
+
+.ps-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* While its more page is open the sheet is a head-only strip: the
+   printed content is folded away (fading into the fold). */
+.proj-sheet.nested .ps-content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.pp-desc {
+    max-width: 760px;
+    margin: 0;
+    color: var(--ink-75);
+}
+
+.pp-media {
+    width: 100%;
+}
+
+.pp-media img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 46vh;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+/* The seam heads: the sheets' title bars. The showcase head sits
+   directly under the collapsed navbar (top: --nav); the more head
+   (sm-head) is flush at its own top edge — the seam — a step
+   smaller to show the nesting. The crease line runs along the top
+   edge of each. Click a head to fold its sheet back. */
+.ps-head,
+.sm-head {
+    position: absolute;
+    top: var(--nav, 50px); /* directly under the collapsed navbar */
+    left: 0;
+    right: 0;
+    height: var(--head, 48px);
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--line-head); /* the crease */
+    border-bottom: 1px solid var(--line-soft);
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: clamp(10px, 1.1vh + 0.2vw, 13px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-55);
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+}
+
+.ps-head:hover,
+.sm-head:hover {
+    color: #E54A53;
+}
+
+.ps-head i,
+.sm-head i {
+    font-size: .85em;
+    opacity: .7;
+}
+
+/* The sheet above casts a soft shadow over the sheet below. */
+.ps-head::after,
+.sm-head::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: linear-gradient(var(--sheet-shadow), transparent);
+    pointer-events: none;
+}
+
+/* The nested head: the more page's title bar, flush at its own top
+   edge — directly under the first head while the sheet is open, a
+   step smaller to show the nesting. */
+.sm-head {
+    top: 0;
+    height: var(--head-sm, 40px);
+    font-size: clamp(9px, 1vh + 0.2vw, 12px);
+}
+
+.pp-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px solid var(--arrow-border);
+    background: var(--arrow-bg);
+    color: var(--arrow-ink);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.pp-prev {
+    left: 26px;
+}
+
+.pp-next {
+    right: 26px;
+}
+
+.pp-arrow:hover {
+    border-color: #E54A53;
+    color: #E54A53;
+    transform: scale(1.08);
+    box-shadow: 0 0 18px rgba(229, 74, 83, .35);
+}
+
+/* No wrap-around: the arrows dim at both ends of the row. */
+.pp-arrow.pp-dim {
+    opacity: .3;
+}
+
+/* While a more page is open its sheet is a head-only strip — there
+   is no row to move along, so the arrows go away. */
+#project-page.has-more .pp-arrow {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* "More information" — the fold line to the spindle's second page.
+   The chevron points at the direction the sheet unfolds. */
+.pp-more {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    transition: color .2s ease-in-out;
+}
+
+.pp-more:hover {
+    color: #E54A53;
+    text-shadow: 0 0 12px rgba(229, 74, 83, .45);
+}
+
+/* ---- More pages: the second fold per project ---- */
+/* Each more page is attached straight below its project's sheet.
+   Closed: no space (its sheet's bottom edge is the seam, Contact
+   follows the last one). Open: exactly one frame minus its sheet's
+   head strip — sheet (nav + head) + more = one frame, and the frame
+   never moves. The fall is the same 3D page turn as the showcase,
+   hinged at the seam (the more page's top edge). */
+.more-page {
+    position: relative;
+    z-index: 1;
+    height: 0;
+    overflow: hidden;
+    background: var(--bg-sheet);
+    perspective: 1300px;
+    transition: height var(--height-d) var(--paper-ease);
+}
+
+.more-page.open {
+    height: calc(100vh - var(--nav, 50px) - var(--head, 48px));
+    height: calc(100dvh - var(--nav, 50px) - var(--head, 48px));
+}
+
+.more-page.closing {
+    transition: height .4s var(--paper-ease);
+}
+
+.sm-fold {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transform-origin: top center;
+    transform: rotateX(179deg);
+    visibility: hidden;
+    transition: transform var(--more-d) var(--paper-ease);
+}
+
+.more-page.open .sm-fold,
+.more-page.closing .sm-fold {
+    visibility: visible;
+}
+
+.more-page.open .sm-fold {
+    transform: rotateX(0deg);
+}
+
+.more-page.closing .sm-fold {
+    transform: rotateX(179deg);
+    transition-duration: var(--more-up-d);
+}
+
+.sm-front,
+.sm-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.sm-back {
+    transform: rotateX(180deg);
+    background: var(--bg-sheet-back);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The printed page on the more sheet: rests straight, aligned with
+   its showcase. When it unfolds from the seam it settles with a
+   small bounce — the same slightly viscous paper coming to rest. */
+.sm-content {
+    position: absolute;
+    top: var(--head-sm, 40px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform-origin: center center;
+}
+
+@keyframes more-land {
+    0%   { transform: translateY(-1.6vh); }
+    62%  { transform: translateY(.45vh); }
+    82%  { transform: translateY(-.2vh); }
+    100% { transform: translateY(0); }
+}
+
+.more-page.open .sm-content {
+    animation: more-land .8s cubic-bezier(.3, .7, .4, 1) .12s both;
+}
+
+/* ---- More page content ---- */
+/* The showcase layout as a card on the paper: a media zone plus the
+   editorial text column. On wide screens they sit side by side
+   (media left, text right); on narrow screens the media sits on top
+   and takes every pixel the text does not (the 1fr grid row). The
+   video fills its zone with object-fit: cover — cropped to the
+   frame, never distorted. */
+.sm-inner {
+    width: min(1240px, calc(100% - 6vw));
+    height: calc(100% - 4.5vh);
+    margin: 2.25vh auto;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: minmax(140px, 1fr) auto;
+    text-align: center;
+}
+
+.sm-media {
+    position: relative;
+    min-height: 0;
+    background: #000;
+    border-radius: 8px;
+}
+
+.sm-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills the zone, crops, never squishes */
+    display: block;
+}
+
+/* The caption rides a scrim along the media's bottom edge. */
+.sm-cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 26px 14px 10px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .65));
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .55);
+    text-align: left;
+}
+
+/* Wide screens: media left, text right — the video blows out to the
+   full height of the page. */
+@media (min-width: 860px) {
+    .sm-inner {
+        grid-template-rows: none;
+        grid-template-columns: 7fr 5fr;
+    }
+}
+
+.sm-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8vh;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5vh 6vw 2.5vh;
+    box-sizing: border-box;
+}
+
+.sm-col h3 {
+    margin: 0;
+    font-size: clamp(12px, 1.2vh + 0.4vw, 20px);
+    letter-spacing: 2px;
+    color: var(--ink-85);
+}
+
+.sm-col p {
+    margin: 0;
+    max-width: 640px;
+    font-size: clamp(11px, 1.25vh + 0.3vw, 15px);
+    line-height: 1.42;
+    color: var(--ink-75);
+}
+
+.sm-col strong {
+    color: var(--ink);
+}
+
+@media (max-width: 767px) {
+    .ps-content {
+        width: min(940px, 92vw);
+    }
+
+    .pp-media img {
+        max-height: 34vh;
+    }
+
+    .pp-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    .pp-prev {
+        left: 8px;
+    }
+
+    .pp-next {
+        right: 8px;
+    }
+
+}
+.spec-table {
+    width: 100%;
+    max-width: 620px;
+    margin: 4px auto 0;
+    border-collapse: collapse;
+}
+
+.spec-table tr {
+    border-top: 1px solid var(--line);
+}
+
+.spec-table tr:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+.spec-table th,
+.spec-table td {
+    padding: 10px 4px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.spec-table th {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    width: 45%;
+}
+
+.spec-table td {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px;
+    color: var(--ink);
+}
+
+@media (max-width: 767px) {
+    .spec-table th,
+    .spec-table td {
+        font-size: 13px;
+    }
+}
+
+/* ============================= */
+/* ✅ Form Styling */
+/* ============================= */
+
+.contact-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.contact-form-wrapper form {
+    max-width: 800px;
+    width: 100%;
+    background: var(--form-bg);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* ✅ Form Inputs & Select Box */
+.contact-form-wrapper input,
+.contact-form-wrapper textarea,
+.contact-form-wrapper select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    color: black;
+}
+
+/* ✅ Input Glow Effect */
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus,
+.contact-form-wrapper select:focus {
+    border: 4px solid #007DAC;
+    box-shadow: 0 0 10px rgba(33, 225, 221, 0.8);
+    background: #f9f9f9;
+    outline: none;
+    color: black;
+}
+
+/* ✅ Placeholder Text */
+.contact-form-wrapper input::placeholder,
+.contact-form-wrapper textarea::placeholder {
+    color: #666;
+}
+
+/* ✅ Submit Button */
+.send-btn {
+    background-color: var(--btn-bg);
+    color: white;
+    animation: rml-glow 4s ease-in-out .6s infinite;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border-radius: 5px;
+    display: inline-block;
+    width: 100%;
+}
+
+/* ✅ Button Hover Effect */
+.send-btn:hover {
+    background-color: #E54A53;
+    transform: scale(1.05);
+}
+
+/* ✅ Responsive Form Adjustments */
+@media (max-width: 768px) {
+    .contact-form-wrapper form {
+        width: 90%;
+    }
+}
+
+/* ============================= */
+/* ✅ Success & Error Modal */
+/* ============================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    color: #333;
+}
+
+/* ============================= */
+/* ✅ Map Section */
+/* ============================= */
+
+#map-section {
+    width: 100vw; /* ✅ Full width */
+    height: 100vh; /* ✅ Full viewport height */
+    display: flex;
+    flex-direction: column; /* ✅ Title stays above map */
+    align-items: center;
+    justify-content: flex-start; /* ✅ Ensures title is at the top */
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* one flick = exactly one page */
+    padding-top: 80px; /* ✅ Adjust for navbar height */
+}
+
+#map-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ink);
+    margin-bottom: 15px; /* ✅ Space between title and map */
+    text-align: center;
+    padding: 20px 0;
+}
+
+#map-container {
+    width: 90vw; /* ✅ Adjusted width for aesthetics */
+    height: calc(100vh - 150px); /* ✅ Ensures map takes remaining space */
+    max-height: 600px; /* ✅ Prevents map from becoming too large */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map {
+    width: 100%; /* ✅ Map fills container */
+    height: 100%; /* ✅ Map takes full container height */
+    min-height: 300px; /* ✅ Prevents map from collapsing */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================= */
+/* ✅ Footer */
+/* ============================= */
+
+footer {
+    padding: 50px 0;
+    text-align: center;
+}
+
+/* ============================= */
+/* ✅ Miscellaneous */
+/* ============================= */
+
+/* ✅ Gallery Hover Effect */
+.gallery img:hover {
+    opacity: 0.4;
+}
+
+/* ✅ Button Animations */
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid var(--circle) !important;
+    border-radius: 50%;
+    font-size: 40px;
+    color: var(--circle);
+    background: transparent;
+    transition: background 0.3s ease-in-out;
+    animation: rml-glow 3.4s ease-in-out infinite;
+}
+
+.btn-circle:hover {
+    color: #E54A53;
+    background: var(--hover-wash);
+}
+
+/* ============================= */
+/* ✅ Full-Screen Sections */
+/* ============================= */
+
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* one flick = exactly one page */
+}
+
+#footer-section {
+    min-height: 100vh; /* ✅ Full screen height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* one flick = exactly one page */
+}
+/* ============================= */
+/* ✅ One page, one screen — the fit system */
+/* =============================
+   Every page is exactly one viewport (100dvh) and nothing on it ever
+   scrolls. All sizes are viewport-relative (vh/vw, clamped between a
+   readable px floor and a 4K ceiling), so the same proportions — and
+   the fit — hold from a 6" phone to a 42" monitor. Moving between
+   pages is vertical (flick) or horizontal (the project row). */
+
+/* Every page: an exact one-viewport stage. The padding clears the
+   fixed navbar above and the fixed circle + readout below. */
+.intro,
+.content-section,
+#map-section,
+#footer-section {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.content-section {
+    padding: 64px 15px 72px;
+}
+
+#map-section,
+#footer-section {
+    padding: 64px 0 72px;
+}
+
+/* Type scale — viewport-relative, clamped (readable floor, 4K cap). */
+h2 {
+    font-size: clamp(19px, 2.2vh + 0.9vw, 54px);
+    margin: 0 0 1.6vh;
+}
+
+h3 {
+    font-size: clamp(13px, 1.4vh + 0.55vw, 28px);
+    margin: 0 0 1.2vh;
+}
+
+p {
+    font-size: clamp(12px, 1.5vh + 0.5vw, 17px);
+    line-height: 1.5;
+    margin: 0 0 1.6vh;
+}
+
+.brand-heading {
+    font-size: clamp(26px, 3.2vh + 1.6vw, 110px);
+    margin-bottom: 1.2vh;
+}
+
+.intro-text {
+    font-size: clamp(12px, 1.4vh + 0.5vw, 30px);
+    margin-bottom: 0;
+}
+
+/* Projects grid — three across on every screen (one row = one page). */
+.projects-grid {
+    gap: 2.5vh;
+    max-width: 1500px;
+}
+
+.project-wrapper {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 440px;
+}
+
+.project-thumbnail {
+    aspect-ratio: 4 / 3;
+}
+
+.project-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-title h3 {
+    margin-top: 1.2vh;
+    line-height: 1.25;
+    font-size: clamp(11px, 1.15vh + 0.35vw, 20px);
+}
+
+/* Missing-image placeholders keep the same 4:3 footprint. */
+.project-thumbnail.img-missing,
+.pp-media.img-missing {
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
+
+/* Project sheet — the densest page; each element gets a share of
+   the viewport so the whole stack always fits. */
+.ps-content {
+    gap: 1vh;
+}
+
+.pp-desc {
+    max-width: 720px;
+    font-size: clamp(12px, 1.35vh + 0.3vw, 17px);
+    line-height: 1.45;
+}
+
+.pp-media img {
+    max-height: 26vh;
+}
+
+.pp-media.img-missing {
+    max-height: 26vh;
+}
+
+.pp-arrow {
+    width: clamp(40px, 6.5vh, 64px);
+    height: clamp(40px, 6.5vh, 64px);
+    font-size: clamp(14px, 2.2vh, 24px);
+}
+
+.spec-table {
+    max-width: 560px;
+}
+
+.spec-table th,
+.spec-table td {
+    font-size: clamp(11px, 1.1vh + 0.25vw, 16px);
+    padding: 0.4em 0;
+    line-height: 1.3;
+}
+
+/* Contact form — compact on a 6" screen, scaled up on large ones. */
+.contact-form-wrapper form {
+    max-width: 720px;
+    padding: clamp(12px, 2.2vh, 28px);
+}
+
+.contact-form-wrapper label {
+    font-size: clamp(11px, 1.1vh + 0.25vw, 15px);
+    margin-bottom: 0.2em;
+}
+
+.contact-form-wrapper input,
+.contact-form-wrapper textarea,
+.contact-form-wrapper select {
+    padding: 0.55em 12px;
+    margin: 0.5vh 0;
+    font-size: clamp(13px, 1.25vh + 0.3vw, 16px);
+}
+
+.contact-form-wrapper textarea {
+    height: clamp(52px, 12vh, 130px);
+}
+
+.form-group {
+    margin-bottom: 1.4vh;
+}
+
+.send-btn {
+    padding: clamp(9px, 1.5vh, 16px) 24px;
+    font-size: clamp(12px, 1.25vh + 0.3vw, 16px);
+}
+
+#contact .contact-form-wrapper > p {
+    margin-bottom: 1.6vh;
+}
+
+/* Map page — the map fills the remaining stage. */
+#map-section {
+    justify-content: center;
+}
+
+#map-title {
+    font-size: clamp(15px, 1.8vh + 0.5vw, 28px);
+    padding: 0;
+    margin: 0 0 0.8vh;
+}
+
+.coords {
+    margin: 0 0 2vh;
+    font-size: clamp(11px, 1.3vh + 0.3vw, 18px);
+}
+
+#map-container {
+    width: min(90vw, 1200px);
+    height: 62vh;
+    max-height: none;
+}
+
+#map {
+    min-height: 180px;
+}
+
+/* Footer. */
+footer {
+    padding: 0;
+}
+
+.footer-note p {
+    margin-bottom: 1vh;
+}
+
+/* The citations line, a step quieter than the rest. */
+.footer-sources {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: clamp(9px, 1vh + 0.2vw, 12px) !important;
+    letter-spacing: 1px;
+    color: var(--ink-45) !important;
+}
+
+/* Fixed navigation — scales with the screen. */
+.page-nav {
+    bottom: max(18px, 3.2vh);
+}
+
+.page-ind {
+    bottom: max(6px, 1.1vh);
+    font-size: clamp(10px, 1.2vh + 0.2vw, 14px);
+}
+
+.btn-circle {
+    width: clamp(54px, 8.5vh, 84px);
+    height: clamp(54px, 8.5vh, 84px);
+    font-size: clamp(24px, 3.8vh, 44px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Short screens (<= 700px tall, e.g. 5.5" phones): compress the
+   densest page (project row) and the form. */
+@media (max-height: 700px) {
+    .ps-content {
+        gap: 0.7vh;
+    }
+
+    .pp-desc {
+        line-height: 1.35;
+    }
+
+    .pp-media img,
+    .pp-media.img-missing {
+        max-height: 16vh;
+    }
+
+    .spec-table th,
+    .spec-table td {
+        padding: 0.3em 0;
+        line-height: 1.25;
+    }
+
+    .contact-form-wrapper form {
+        padding: 6px 12px;
+    }
+
+    .contact-form-wrapper input,
+    .contact-form-wrapper textarea,
+    .contact-form-wrapper select {
+        margin: 0.3vh 0;
+    }
+
+    .form-group {
+        margin-bottom: 1vh;
+    }
+
+    .contact-form-wrapper textarea {
+        height: 9vh;
+    }
+}
+
+/* Landscape phones (very short viewports): the form goes two
+   columns so it still fills one screen. */
+@media (orientation: landscape) and (max-height: 480px) {
+    #contact .contact-form-wrapper > p {
+        display: none;
+    }
+
+    #contact .contact-form-wrapper form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 18px;
+        align-items: start;
+        padding: 8px 14px;
+    }
+
+    #contact .form-group {
+        margin-bottom: 0.7vh;
+    }
+
+    #contact .contact-form-wrapper input,
+    #contact .contact-form-wrapper textarea,
+    #contact .contact-form-wrapper select {
+        margin: 0.3vh 0;
+    }
+
+    #contact .contact-form-wrapper textarea,
+    #contact .send-btn {
+        grid-column: 1 / -1;
+    }
+
+    /* Project sheet on a ~375px-tall landscape screen: last few px. */
+    .ps-content {
+        gap: 0.6vh;
+    }
+
+    .pp-media img,
+    .pp-media.img-missing {
+        max-height: 13vh;
+    }
+
+    /* Map page: the stage is only ~375px tall — the map shrinks to
+       match. */
+    #map-section {
+        padding: 54px 0 58px;
+    }
+
+    #map-container {
+        height: 52vh;
+    }
+
+    #map-title {
+        margin-bottom: 0.4vh;
+    }
+
+    .coords {
+        margin-bottom: 1vh;
+    }
+}
+
+
+/* ============================= */
+/* ✅ Motion & affordance (2026-10) */
+/* ============================= */
+/* Subtle signals that something can be touched. Everything here is
+   box-shadow / transform / underline-grow — no layout shift. The red
+   halo breathes to zero, so at rest the page stays as quiet as before.
+   All of it is switched off under prefers-reduced-motion below. */
+
+@keyframes rml-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(229, 74, 83, 0); }
+    50% { box-shadow: 0 0 16px 2px rgba(229, 74, 83, .25); }
+}
+
+/* Nav links: an accent underline grows in from the left on hover,
+   and stays on the section you are on. */
+.navbar-custom .navbar-nav > li > a {
+    position: relative;
+}
+
+.navbar-custom .navbar-nav > li > a::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 11px;
+    height: 1px;
+    background: #E54A53;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .25s ease-in-out;
+}
+
+.navbar-custom .navbar-nav > li > a:hover::after,
+.navbar-custom .navbar-nav > li.active > a::after {
+    transform: scaleX(1);
+}
+
+/* Theme toggle: the icon gives a quarter turn on hover. */
+.theme-toggle svg {
+    transition: transform .25s ease-in-out;
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(90deg);
+}
+
+/* ============================= */
+/* ✅ Modern baselines */
+/* ============================= */
+
+::selection {
+    background: #E54A53;
+    color: #fff;
+}
+
+:focus-visible {
+    outline: 2px solid #E54A53;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .btn-circle .fa {
+        animation: none;
+    }
+
+    /* motion & affordance layer (2026-10) */
+    .btn-circle,
+    .send-btn {
+        animation: none !important;
+    }
+
+    .project-link:hover .project-thumbnail,
+    .send-btn:hover,
+    .pp-arrow:hover {
+        transform: none;
+    }
+
+    .navbar-custom .navbar-nav > li > a::after,
+    .theme-toggle svg {
+        transition: none;
+    }
+}
+
+/* ✅ Map coordinates readout */
+.coords {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--ink-60);
+    margin: -8px 0 18px;
+}
+
+/* ✅ Map marker: air-bearing crosshair (lab's motif, matches favicon) */
+.rml-crosshair-pin {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #E54A53;
+    position: relative;
+    box-shadow: 0 0 12px rgba(229, 74, 83, .5);
+}
+
+.rml-crosshair-pin::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: #E54A53;
+    border-radius: 50%;
+}

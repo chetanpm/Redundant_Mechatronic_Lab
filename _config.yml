@@ -1,0 +1,53 @@
+# 2026-09: site improvements in this file developed with AI assistance.
+# Site settings
+title: Redundant Mechatronic Lab
+email: redundantlab@pm.me
+description: Make stuff of your dreams into the reality. We help compose them.
+
+# Use correct baseurl
+baseurl: "/Redundant_Mechatronic_Lab"  # Change this to match GitHub Pages repository name
+url: "https://chetanpm.github.io"      # GitHub Pages main domain
+
+# Ensure Jekyll includes the _pages directory
+include:
+  - _pages
+
+# Dev/tooling files that must not be published
+exclude:
+  - preview.html
+  - fit-test.html
+  - tools
+  - Gemfile
+  - Gemfile.lock
+  - assets/img/cad   # CAD source material (renders + line trace) — never published
+
+# Define pages collection correctly
+collections:
+  pages:
+    output: true
+
+# Set permalink structure to avoid conflicts
+permalink: /:path/
+
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  primary-dark: '#000000'
+  links: '#007DAC'
+
+# Social networks usernames
+social:
+  - title: twitter
+    url: https://twitter.com/pmchetan
+  - title: github
+    url: https://github.com/Redundant-Mechatronic-Lab
+
+# Build settings
+markdown: kramdown
+paginate: 5  # Optional: Set pagination for blog posts
+paginate_path: "/page:num/"
+
+# Plugins (Optional, but useful)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

@@ -1,0 +1,180 @@
+<!-- 2026-09: site improvements in this file developed with AI assistance. -->
+<!-- Projects Section -->
+<section id="projects" class="content-section text-center">
+  <div class="projects-section">
+    <div class="container">
+      <div class="col-lg-12">
+        <h2>Ongoing Projects</h2>
+        
+        <!-- Projects Grid (click a project to unfold its page below) -->
+        <div class="projects-grid">
+          {% for project in site.data.projects %}
+          <div class="project-wrapper">
+            <a class="project-link" href="#projects" data-index="{{ forloop.index }}">
+              <!-- Project Thumbnail -->
+              <div class="project-thumbnail">
+                <img src="{{ project.image_thumbnail }}" alt="{{ project.name }}" loading="lazy"
+                     onerror="this.style.display='none'; this.parentNode.classList.add('img-missing')">
+              </div>
+              <!-- Project Title (Below Thumbnail) -->
+              <div class="project-title">
+                <h3>{{ project.name }}</h3>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project page: a real page in the flow, folded between Projects
+     and Contact. Clicking a card unfolds this page as a 3D page
+     turn — the sheet falls from the fold line (the seam) down into
+     the frame, blank back of the paper first — and its printed
+     content lands at a per-project diagonal: the left card's page
+     to the right, the middle straight down, the right card's to the
+     left (a tri-fold fan). At its top sits the head: the sheet's
+     title bar directly under the navbar — the parent's name,
+     centered, the link that unfolded it now the page's title.
+     Click it to fold the sheet back. Each project carries one more
+     folded page ("More information"), attached straight below its
+     sheet; opening it folds the more page down from the seam while
+     the showcase sheet shrinks to its head strip — the hidden page
+     revealing. The ‹ › arrows fold to the neighbouring project. -->
+<!-- Layer three (the CAD ground work): a faint line trace of the
+     desktop mill's model under the paper. It draws itself once this
+     area first comes into view (custom.js); decorative only. -->
+<section id="project-page">
+  <div class="cad-layer" aria-hidden="true">
+    {% include cad-trace.html %}
+  </div>
+  <button type="button" class="pp-arrow pp-prev" aria-label="Previous project"><i class="fa fa-angle-left"></i></button>
+  <button type="button" class="pp-arrow pp-next" aria-label="Next project"><i class="fa fa-angle-right"></i></button>
+  {% for project in site.data.projects %}
+  <div class="proj-sheet sheet-{{ forloop.index }}" data-index="{{ forloop.index }}">
+    <div class="ps-fold">
+      <div class="ps-back" aria-hidden="true"><span class="pb-mark">RML</span></div>
+      <div class="ps-front">
+        <div class="ps-pan">
+          <button type="button" class="ps-head" aria-label="Fold back to Projects"><i class="fa fa-angle-up"></i><span>{{ project.name }}</span></button>
+          <div class="ps-content">
+            <p class="pp-desc">{{ project.details }}</p>
+            <div class="pp-media">
+              <img src="{{ project.image_expanded }}" alt="{{ project.name }}"
+                   onerror="this.style.display='none'; this.parentNode.classList.add('img-missing')">
+            </div>
+            <table class="spec-table">
+              <tbody>
+                {% for spec in project.specifications %}
+                <tr>
+                  <th>{{ spec.label }}</th>
+                  <td>{{ spec.value }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% if project.more_page %}
+            <a class="pp-more" href="#{{ project.more_page }}">More information <i class="fa fa-angle-down"></i></a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<!-- "More information" pages: one second sheet per project, each
+     attached straight below its project's sheet (class more-page +
+     more-N, same diagonal as its showcase). Each opens nested: the
+     showcase shrinks to its head strip and this sheet's smaller
+     head sits flush under the first; clicking it folds this sheet
+     back. Body: the showcase layout — a media card beside (or
+     above, on narrow screens) the editorial text column. -->
+<div id="desktop-more" class="more-page more-1">
+  <div class="sm-fold">
+    <div class="sm-back" aria-hidden="true"><span class="pb-mark">RML</span></div>
+    <div class="sm-front">
+      <button type="button" class="sm-head" aria-label="Fold back to the desktop mill page"><i class="fa fa-angle-up"></i><span>Build &amp; Design</span></button>
+      <div class="sm-content">
+        <div class="sm-inner">
+    <div class="sm-media">
+      <video class="sm-video" muted loop playsinline autoplay preload="metadata"
+             poster="/Redundant_Mechatronic_Lab/assets/img/projects/desktop-mill-poster.webp">
+        <source src="/Redundant_Mechatronic_Lab/assets/video/desktop-mill.av1.webm" type="video/webm; codecs=av01">
+        <source src="/Redundant_Mechatronic_Lab/assets/video/desktop-mill.mp4" type="video/mp4">
+      </video>
+      <p class="sm-cap">Desktop milling machine — machining a test workpiece in the lab</p>
+    </div>
+    <div class="sm-col">
+      <h3>Why it exists</h3>
+      <p>Every machine in this lab needs jigs, fixtures and one-off parts before it can be tested. Rather than waiting on a job shop, the lab mills that work itself — the desktop mill is the benchtop end of the machine family.</p>
+      <h3>How it's built</h3>
+      <p>An anodised aluminium frame on linear guides, ball-screw driven axes, a 24,000 RPM spindle. Designed and machined in-house; the 300 × 200 × 100 mm work envelope is sized for the parts our other projects actually need.</p>
+      <h3>What it's for</h3>
+      <p>Small precision parts, prototypes and tooling — the machine that keeps the other machines moving.</p>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="spindle-more" class="more-page more-2">
+  <div class="sm-fold">
+    <div class="sm-back" aria-hidden="true"><span class="pb-mark">RML</span></div>
+    <div class="sm-front">
+      <button type="button" class="sm-head" aria-label="Fold back to the spindle page"><i class="fa fa-angle-up"></i><span>Technical Specifications</span></button>
+      <div class="sm-content">
+        <div class="sm-inner">
+    <div class="sm-media">
+      <video class="sm-video" muted loop playsinline autoplay preload="metadata"
+             poster="/Redundant_Mechatronic_Lab/assets/img/projects/spindle-imtex-poster.webp">
+        <source src="/Redundant_Mechatronic_Lab/assets/video/spindle-imtex.av1.webm" type="video/webm; codecs=av01">
+        <source src="/Redundant_Mechatronic_Lab/assets/video/spindle-imtex.mp4" type="video/mp4">
+      </video>
+      <p class="sm-cap">Porous graphite aerostatic spindle — working prototype, IMTEX 2025</p>
+    </div>
+    <div class="sm-col">
+      <h3>How it works</h3>
+      <p>Every precision machine is limited by how accurately its spindle can rotate. This one has nothing to touch: the shaft floats on a film of air only microns thick, metered through a sleeve of porous graphite that lets air seep uniformly over its whole surface. The film is stable at every speed — including zero — so there is no friction, no wear, almost no heat and almost no vibration. The only maintenance is clean, dry air.</p>
+      <h3>Where it is used</h3>
+      <p><strong>Diamond and optical finishing</strong> — diamond turning and ultra-precision grinding of glass, ceramics and hard crystals need a spindle without friction, vibration or thermal drift.</p>
+      <p><strong>Metrology instruments</strong> — a measuring machine is only as accurate as its rotation reference; a wear-free, drift-free spindle keeps instruments in calibration for years.</p>
+      <p><strong>Aerospace and semiconductor precision parts</strong> — micro-bores, micro-milling, features held to a fraction of a micron.</p>
+      <h3>Where it stands</h3>
+      <p>Working prototype, designed and built by our industry partner CMTI. CMTI's published <a href="https://drishti.cmti.res.in/downloads/TPrelease2.0_BG_02.02.2023.pdf" target="_blank" rel="noopener">Technology Profile</a> documents the platform. The design is shared with us; our part is cost — same accuracy, a fraction of the price. We believe in open source; where collaboration and investment require it, some products stay closed.</p>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tabletop-more" class="more-page more-3">
+  <div class="sm-fold">
+    <div class="sm-back" aria-hidden="true"><span class="pb-mark">RML</span></div>
+    <div class="sm-front">
+      <button type="button" class="sm-head" aria-label="Fold back to the tabletop page"><i class="fa fa-angle-up"></i><span>Build &amp; Test</span></button>
+      <div class="sm-content">
+        <div class="sm-inner">
+    <div class="sm-media">
+      <img class="sm-video" src="/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_more.webp"
+           alt="Tabletop 4-axis milling machine on the shop floor">
+      <p class="sm-cap">Tabletop 4-axis mill — on the shop floor with Max Auto Cables Bengaluru</p>
+    </div>
+    <div class="sm-col">
+      <h3>Why it exists</h3>
+      <p>The desktop mill covers small work; the tabletop covers everything else that fits on a bench — a full four-axis machine in a compact footprint, designed with Max Auto Cables Bengaluru and built in the lab.</p>
+      <h3>How it's built</h3>
+      <p>A heavy machined base, precision linear guideways and ball screws on every axis, driven by a custom LinuxCNC controller. Absolute linear scales hold the axes to ±15 µm.</p>
+      <h3>The fourth axis</h3>
+      <p>A rotary B-axis turns the workpiece while the tool cuts — pockets, curves and compound angles in a single setup, no re-fixturing.</p>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

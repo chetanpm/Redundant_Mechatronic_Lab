@@ -1,0 +1,44 @@
+- name: Desktop Milling Machine
+  more_page: "desktop-more"   # carries a second, folded "More information" page (see 5-projects.html)
+  details: "A compact milling machine designed for small precision work."
+  image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/desktop_mill_thumb.webp"
+  image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/desktop_mill_full.webp"
+  specifications:
+    - label: Spindle Speed
+      value: 24,000 RPM
+    - label: Work Area
+      value: 300mm x 200mm x 100mm
+    - label: Accuracy
+      value: ± 0.01mm
+
+- name: Aerostatic Bearing Spindle
+  more_page: "spindle-more"   # carries a second, folded "More information" page (see 5-projects.html)
+  details: "The shaft floats on a pressurized air film through a porous graphite layer — no contact, no friction, no wear. Built for ultra-precision machining and metrology. Rig-tested, machining trials complete, exhibited at IMTEX 2025."
+  image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/aerostatic_spindle_imtex_thumb.webp"
+  image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/aerostatic_spindle_imtex.webp"
+  specifications:
+    - label: Max Speed
+      value: 12,000 RPM (motor)
+    - label: Bearing Type
+      value: Aerostatic · porous graphite
+    - label: Running Accuracy
+      value: "< 0.4 µm (400 nm)"
+    - label: Positioning
+      value: "± 0.5 arcsec"
+    - label: Axial Load
+      value: 100 kg
+    - label: Stiffness (axial / radial)
+      value: "300 / 150 N/µm"
+
+- name: Tabletop 4-Axis Milling Machine
+  more_page: "tabletop-more"   # carries a second, folded "More information" page (see 5-projects.html)
+  details: "A powerful 4-axis CNC milling machine designed with Max Auto Cables Bengaluru for high speed milling in a compact footprint."
+  image_thumbnail: "/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_thumb.webp"
+  image_expanded: "/Redundant_Mechatronic_Lab/assets/img/projects/tabletop_mill_full.webp"
+  specifications:
+    - label: Axis Configuration
+      value: X, Y, Z, B (Rotary)
+    - label: Controller
+      value: Custom LinuxCNC
+    - label: Axes resolution
+      value: ± 15µ with absolute linear scales

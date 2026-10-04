@@ -1,0 +1,30 @@
+<!-- 2026-09: site improvements in this file developed with AI assistance. -->
+<!-- Footer Section -->
+<section id="footer-section">
+    <footer>
+        <div class="footer-body">
+            <div class="container text-center footer-note">
+                <p>© {{ site.time | date: "%Y" }} Redundant Mechatronic Lab. All rights reserved.</p>
+                <p>Mysuru, Karnataka, India</p>
+                <p>Built using the <a href="http://jeromelachaud.github.io/grayscale-theme/">Grayscale theme</a>.</p>
+                <p class="footer-sources">
+                    Sources:
+                    <a href="https://drishti.cmti.res.in/downloads/TPrelease2.0_BG_02.02.2023.pdf" target="_blank" rel="noopener">CMTI Technology Profile</a>
+                    ·
+                    <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
+                </p>
+                <p>
+                    <a href="mailto:{{ site.email }}"><i class="fa fa-envelope"></i></a>
+                    <a href="https://github.com/Redundant-Mechatronic-Lab"><i class="fa fa-github"></i></a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</section>
+
+<!-- Navigation space: one fixed circle — the same screen position on every page.
+     JS swaps the arrow (down = next page, up = top) and updates the 0X / 06 readout. -->
+<a href="#about" id="page-nav" class="btn btn-circle page-nav" aria-label="Next page">
+    <i class="fa fa-angle-double-down"></i>
+</a>
+<span class="page-ind" id="page-ind" aria-hidden="true">01 / 06</span>

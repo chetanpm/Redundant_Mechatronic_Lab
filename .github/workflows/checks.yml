@@ -1,0 +1,46 @@
+# Warns when something breaks the website.
+#
+# Runs on EVERY pull request — including Dependabot's automatic gem-bump PRs
+# (.github/dependabot.yml) — plus on pushes to main. It does a strict Jekyll
+# build (warnings = errors) and then runs the site checks (required files,
+# internal link checker with a known-404 baseline, brief structure). If a gem
+# rollout breaks the site, this check goes RED on the PR: that is the warning.
+#
+# To block merging red PRs entirely: repo Settings -> Branches -> add a rule
+# for "main" that requires the status check "build-check" to pass.
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    env:
+      # Same frozen-lock rule as the deploy workflow: checks and deployment
+      # always run the identical gem tree.
+      BUNDLE_FROZEN: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Ruby
+        # Ruby version comes from .ruby-version (3.4).
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches gems automatically
+      - name: Report toolchain
+        run: |
+          ruby -v
+          bundle exec ruby -r jekyll -e 'puts "jekyll #{Jekyll::VERSION} | kramdown #{Kramdown::VERSION} | liquid #{Liquid::VERSION}"'
+      - name: Build with Jekyll (strict)
+        run: bundle exec jekyll build --strict --baseurl /Redundant_Mechatronic_Lab
+        env:
+          JEKYLL_ENV: production
+      - name: Site checks
+        run: python3 tools/check_site.py _site

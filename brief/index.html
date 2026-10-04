@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<!-- 2026-10: theme init — applies a stored choice (rml-theme) before the
+     first paint so there is no flash. No stored choice = no attribute,
+     and the CSS follows the OS (prefers-color-scheme) live. -->
+<script>(function(){try{var t=localStorage.getItem("rml-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+<title>Market Brief — Porous-Graphite Aerostatic Spindle (ABR-150M) · Redundant Mechatronic Lab</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23E54A53' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23E54A53'/%3E/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141414; --ink2:#3b3b3b; --muted:#717171;
+  --accent:#e54a53; --line:#e1e1e1; --bg:#fbfbfa; --card:#ffffff;
+  --bg2:#f6f5f4; --line2:#e4e1de; --th:#f4f4f3;
+  --tint:#fbf3f4; --tint2:#f3f3f2; --hoverrow:#f7f7f6; --link:#1a5f7a;
+  --circle:rgba(20,20,20,.7); --hover-wash:rgba(20,20,20,.08);
+  --mono:"IBM Plex Mono","SF Mono","Cascadia Code",Consolas,monospace;
+  --sans:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+/* 2026-10: theme system developed with AI assistance. Base tokens above are
+   LIGHT (the original design). DARK applies via the nav toggle (stored as
+   rml-theme) or, with no stored choice, live from the OS preference. The
+   black site-nav and footer keep their look in both themes. */
+:root[data-theme="dark"]{
+  --ink:#e9e9e7; --ink2:rgba(233,233,231,.78); --muted:#8f8f8f;
+  --bg:#121212; --card:#1a1a1a; --line:#2b2b2b;
+  --bg2:#211f1e; --line2:#35322f; --th:#1f1e1d;
+  --tint:#261a1b; --tint2:#1e1e1e; --hoverrow:#211f1e; --link:#6cb9d8;
+  --circle:#ffffff; --hover-wash:rgba(255,255,255,.1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+  --ink:#e9e9e7; --ink2:rgba(233,233,231,.78); --muted:#8f8f8f;
+  --bg:#121212; --card:#1a1a1a; --line:#2b2b2b;
+  --bg2:#211f1e; --line2:#35322f; --th:#1f1e1d;
+  --tint:#261a1b; --tint2:#1e1e1e; --hoverrow:#211f1e; --link:#6cb9d8;
+  --circle:#ffffff; --hover-wash:rgba(255,255,255,.1);
+  }
+}
+/* ---------- theme toggle (site-nav): round sun/moon, white on the black bar */
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;flex:none;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:transparent;color:#fff;cursor:pointer;transition:all .2s ease-in-out;padding:0;}
+.theme-toggle:hover,.theme-toggle:focus{color:#E54A53;border-color:#E54A53;background:rgba(255,255,255,.08);outline:none;}
+.theme-toggle .ic-moon{display:none;}
+.theme-toggle.in-light .ic-moon{display:inline;}
+.theme-toggle.in-light .ic-sun{display:none;}
+*{box-sizing:border-box}
+html{width:100%;height:100%;scroll-behavior:smooth;scroll-snap-type:y mandatory;}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.6 var(--sans);}
+
+/* ---------- paged sections (2026-10-02, v6) — the site's model ----------
+   One flick = exactly one screen, like the main website. Every page is an
+   exact one-viewport stage (100dvh), content vertically centred. Padding
+   clears the fixed navbar above and the fixed circle + readout below.
+   Dense pages may scroll inside their .inner on small screens (the
+   governor hands the wheel over natively). */
+.bpage{position:relative;height:100vh;height:100dvh;min-height:0;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;justify-content:center;padding:max(64px,7vh) 20px max(96px,13vh);}
+.bpage .inner{position:relative;width:100%;max-width:920px;margin:0 auto;max-height:100%;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;}
+.bpage .inner::-webkit-scrollbar{display:none;}
+.kicker{font:600 11px/1.4 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.ph h2{font-size:clamp(19px,2.4vh + 1vw,30px);line-height:1.22;margin:0 0 16px;font-weight:700;letter-spacing:-.005em;}
+p{margin:9px 0;}
+ul,ol{margin:9px 0;padding-left:22px;}
+li{margin:7px 0;}
+strong{font-weight:700;}
+.num{font-family:var(--mono);font-size:.93em;}
+.srcnote{font:500 10.5px/1.5 var(--mono);color:var(--muted);margin-top:10px;}
+
+/* ---------- cover ---------- */
+.cover{text-align:center;}
+/* The cover is the machine itself — the IMTEX photo under a dark overlay,
+   white type in both themes (the site's intro does the same). The meta
+   grid rides on a translucent dark panel. */
+.cover{background:linear-gradient(rgba(8,8,10,.78),rgba(8,8,10,.92)),url(../assets/img/projects/aerostatic_spindle_imtex.webp) center/cover no-repeat;}
+/* The cover runs a short silent orbit of the machine under that overlay.
+   The photo stays as CSS background + poster, so no-video (offline, print,
+   no-JS) renders exactly the old cover. The darkening gradient must sit
+   ABOVE the video, so it lives in ::before (the background layer is behind
+   the video element and would not dim it). */
+.cover-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.cover::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(rgba(8,8,10,.78),rgba(8,8,10,.92));}
+.cover .inner{z-index:2;}
+.cover h1{color:#fff;}
+.cover .sub{color:rgba(255,255,255,.95);text-shadow:0 1px 16px rgba(0,0,0,.9);}
+.cover .hint{color:rgba(255,255,255,.7);text-shadow:0 1px 8px rgba(0,0,0,.6);}
+.cover .meta{background:rgba(0,0,0,.42);border-color:rgba(255,255,255,.26);}
+.cover .meta>div{border-color:rgba(255,255,255,.26);}
+.cover .meta .v{color:#fff;}
+.cover .kicker{margin-bottom:20px;}
+.cover h1{font-size:clamp(25px,4.6vh + 1.1vw,44px);line-height:1.14;margin:0 0 16px;font-weight:800;letter-spacing:-.01em;}
+.cover .sub{font-size:15.5px;color:var(--ink2);margin:0 auto 22px;max-width:780px;}
+.cover .hint{font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:26px;}
+
+/* ---------- header blocks (meta, stats) ---------- */
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border:1px solid var(--line);border-bottom:none;font-size:13px;background:var(--card);text-align:left;}
+.meta>div{padding:11px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);}
+.meta .k{font:600 10px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.meta .v{margin-top:3px;}
+.notnew{font-size:14.5px;color:var(--ink2);border-left:3px solid var(--accent);padding:11px 15px;background:var(--tint);margin:0 0 20px;}
+.notnew b{color:var(--ink);}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;}
+.stat{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--accent);padding:11px 13px;}
+.stat .v{font:700 17px/1.25 var(--mono);color:var(--ink);}
+.stat .l{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.4;}
+
+/* ---------- tables ---------- */
+.tblwrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px;}
+th{background:var(--th);text-align:left;padding:8px 10px;border:1px solid var(--line);font:600 10.5px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);}
+td{padding:8px 10px;border:1px solid var(--line);vertical-align:top;}
+td.num,th.num{font-family:var(--mono);font-size:12px;white-space:nowrap;}
+table.spec2{min-width:0;}
+
+/* ---------- photos & data visuals ---------- */
+.fig{margin:14px 0 2px;}
+.fig img,.fig video{display:block;width:100%;max-height:clamp(110px,18vh,185px);object-fit:cover;border-radius:4px;border:1px solid var(--line);background:#141416;}
+.fig.tall img{max-height:clamp(120px,21vh,205px);}
+.fig.short img,.fig.short video{max-height:clamp(95px,14vh,150px);}
+.fig.short img.bench{object-position:center 40%;}
+.fig .cap{font:500 9.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.chart{margin:8px 0 0;}
+.chart svg{display:block;width:100%;height:auto;max-height:225px;}
+.chart.big svg{max-height:380px;}
+.chart text{font-family:var(--mono);}
+.chart figcaption{font:500 9.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* ---------- vendor / prospect cards (tables, re-paginated for phones) ---------- */
+.vcs,.pcs{display:grid;grid-template-columns:1fr;gap:8px;}
+@media (min-width:768px){.vcs{grid-template-columns:1fr 1fr;}.pcs{grid-template-columns:1fr 1fr;}}
+.vc{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;background:var(--card);padding:9px 13px;font-size:13px;}
+.vc-name{font-weight:700;font-size:13.5px;}
+.vc-co{color:var(--muted);font-weight:400;font-size:11.5px;}
+.vc-model{font:600 12px var(--mono);}
+.vc-spec{font:12px/1.5 var(--mono);color:var(--ink2);margin-top:3px;}
+.vc-price{font-size:12px;color:var(--muted);margin-top:3px;}
+.pc{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;background:var(--card);padding:9px 13px;font-size:12.5px;line-height:1.5;}
+.pc-name{font-weight:700;font-size:13.5px;}
+.pc-loc{color:var(--muted);font-weight:400;font-size:11px;}
+.pc-what{color:var(--ink2);margin-top:3px;}
+.pc-use{margin-top:4px;color:var(--ink2);}
+.pc-use b{color:var(--accent);font:600 9.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-right:6px;}
+.trio{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+@media (min-width:768px){.trio{grid-template-columns:1fr 1fr 1fr;}}
+.trio>div{border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:4px;background:var(--card);padding:10px 13px;font-size:13px;line-height:1.5;}
+.trio b{font:700 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px;}
+
+/* ---------- callouts ---------- */
+.callout{border-left:3px solid var(--accent);background:var(--tint);padding:12px 15px;margin:14px 0;font-size:14px;}
+.callout.neutral{border-left-color:var(--ink);background:var(--tint2);}
+.callout .t{font:700 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px;}
+
+/* ---------- links ----------
+   Minimal external references (v6.3): a handful of direct product /
+   source pages, all opening in a new tab. */
+.inner a{color:var(--link);text-decoration:none;word-break:break-word;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .25s ease-in-out;}
+.inner a:hover{background-size:100% 1px;text-decoration:underline;}
+.inner a .ex{font:600 9px var(--mono);color:var(--muted);}
+
+/* ---------- site nav (matches the main site) ----------
+   Site-identical bar (2026-10-02): same structure, fonts, sizes and
+   colours as the main site's .navbar-custom (values measured from the
+   live build): 50px black bar, no border, brand 18px/700, links 14px/400,
+   system font stack, red hover + growing underline, 30px round toggle.
+   No logo, no doc-tag. Mobile = the site's hamburger + black drop-down. */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1030;background:#000;}
+.sn-inner{position:relative;display:flex;align-items:center;justify-content:space-between;max-width:1170px;margin:0 auto;height:50px;padding:0 15px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;}
+/* same container widths as Bootstrap .container (site parity) */
+@media (min-width:768px){.sn-inner{width:750px;}}
+@media (min-width:992px){.sn-inner{width:970px;}}
+@media (min-width:1200px){.sn-inner{width:1170px;}}
+.sn-brand{color:#fff;font-size:18px;font-weight:700;line-height:20px;text-transform:uppercase;text-decoration:none;}
+.sn-brand:hover,.sn-brand:focus{color:#E54A53;}
+.sn-toggle{display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:44px;height:44px;background:transparent;border:none;cursor:pointer;margin-left:auto;padding:0;}
+.sn-toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:1px;}
+.sn-links{display:flex;align-items:center;list-style:none;margin:0;padding:0;}
+.sn-links a{position:relative;display:block;color:#fff;font-size:14px;font-weight:400;line-height:20px;padding:15px;text-transform:uppercase;text-decoration:none;transition:color .2s ease-in-out;}
+.sn-links a::after{content:"";position:absolute;left:15px;right:15px;bottom:11px;height:1px;background:#E54A53;transform:scaleX(0);transform-origin:left center;transition:transform .25s ease-in-out;}
+.sn-links a:hover::after{transform:scaleX(1);}
+.sn-links a:hover,.sn-links a:focus{color:#E54A53 !important;}
+@media (max-width:767px){
+  .sn-toggle{display:flex;}
+  .sn-links{position:absolute;top:50px;left:0;right:0;display:none;background:#000;border-top:1px solid rgba(255,255,255,.18);}
+  .site-nav.open .sn-links{display:flex;flex-direction:column;align-items:stretch;padding-bottom:8px;}
+  .sn-links a{padding:10px 15px;}
+  .sn-links a::after{display:none;}
+  .sn-links li.sn-item{padding:0 15px;}
+}
+
+/* ---------- page navigation — the site's circle + readout ----------
+   One fixed circle at the same screen position on every page (down = next
+   page; on the last page it becomes the up-arrow, back to top) and the
+   mono NN / TT readout beneath it. Same geometry, glow and bob as the
+   main site's .page-nav / .page-ind. */
+.page-nav{position:fixed;left:50%;bottom:max(18px,3.2vh);transform:translateX(-50%);z-index:100;width:clamp(54px,8.5vh,84px);height:clamp(54px,8.5vh,84px);display:flex;align-items:center;justify-content:center;padding:0;border:2px solid var(--circle);border-radius:50%;background:transparent;color:var(--circle);cursor:pointer;animation:rml-glow 3.4s ease-in-out infinite;transition:color .3s ease-in-out,border-color .3s ease-in-out,background .3s ease-in-out;}
+.page-nav:hover,.page-nav:focus{color:#E54A53;border-color:#E54A53;background:var(--hover-wash);outline:none;}
+.page-nav svg{width:52%;height:auto;animation:circle-bob 2.4s ease-in-out infinite;display:block;}
+.page-nav.at-end svg{animation-name:circle-bob-up;}
+.page-nav .ic-up{display:none;}
+.page-nav.at-end .ic-down{display:none;}
+.page-nav.at-end .ic-up{display:block;}
+.page-ind{position:fixed;left:50%;bottom:max(6px,1.1vh);transform:translateX(-50%);z-index:100;white-space:nowrap;font:500 clamp(10px,1.2vh + 0.2vw,14px) var(--mono);letter-spacing:2px;color:var(--muted);}
+
+/* ---------- footer (colophon page, matches the main site) ---------- */
+.bpage.colophon .inner{text-align:center;}
+footer{background:#000;color:rgba(255,255,255,.75);padding:26px 24px;font-size:13px;border-radius:4px;}
+footer a{color:#fff;text-decoration:none;text-transform:uppercase;font-family:var(--mono);font-size:11px;letter-spacing:2px;}
+footer a:hover{color:var(--accent);}
+footer p{margin:8px 0;}
+footer .fine{font-size:11.5px;color:rgba(255,255,255,.5);max-width:780px;margin:14px auto 0;line-height:1.6;}
+
+/* ---------- motion & affordance ----------
+   Subtle signals that something can be touched — no layout shift.
+   The circle breathes (rml-glow) and its chevron bobs, like the site.
+   All off under prefers-reduced-motion. */
+@keyframes rml-glow{0%,100%{box-shadow:0 0 0 0 rgba(229,74,83,0)}50%{box-shadow:0 0 16px 2px rgba(229,74,83,.25)}}
+@keyframes circle-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+@keyframes circle-bob-up{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.theme-toggle svg{transition:transform .25s ease-in-out;}
+.theme-toggle:hover svg{transform:rotate(90deg);}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .page-nav,.page-nav svg,.inner a,.theme-toggle svg,.sn-links a::after{animation:none !important;transition:none !important;transform:none !important;}
+}
+/* Phones: compress the type scale so the densest page fits the 375×812
+   floor (the site does the same for its densest page). */
+@media (max-width:640px){
+  body{font-size:13.5px;line-height:1.5;}
+  .bpage{padding:max(58px,7vh) 16px max(86px,12vh);}
+  .kicker{font-size:10px;margin-bottom:6px;}
+  .ph h2{font-size:18px;margin-bottom:8px;}
+  .cover h1{font-size:26px;}
+  .cover .sub{font-size:14px;margin-bottom:16px;}
+  p{margin:5px 0;}
+  ul,ol{margin:4px 0;}
+  li{margin:3px 0;}
+  .notnew{font-size:13px;padding:9px 13px;margin-bottom:14px;}
+  .meta{font-size:12px;}
+  .stats{grid-template-columns:repeat(2,1fr);gap:7px;}
+  .stat{padding:9px 11px;}
+  .stat .v{font-size:15px;}
+  .stat .l{font-size:11px;}
+  table{font-size:11.5px;}
+  th,td{padding:4px 8px;}
+  .callout{font-size:12px;padding:7px 11px;margin:6px 0;}
+  .vc{padding:8px 11px;font-size:12px;}
+  .pc{padding:5px 10px;font-size:11.5px;}
+  .vcs,.pcs{gap:6px;}
+  .pc-what{margin-top:2px;}
+  .pc-use{margin-top:3px;}
+  .cover .meta{grid-template-columns:1fr 1fr;}
+  .cover .meta>div{padding:8px 10px;}
+}
+@media print{
+  html{scroll-snap-type:none;scroll-behavior:auto;}
+  .site-nav,.page-nav,.page-ind{display:none !important;}
+  .bpage{height:auto;min-height:0;overflow:visible;break-after:page;padding:14mm 12mm;}
+  .bpage .inner{max-width:none;max-height:none;overflow:visible;}
+  .cover{background:none !important;}
+  .cover-vid,.cover::before{display:none !important;}
+  .cover h1{color:#141414;}
+  .cover .sub{color:#3b3b3b;}
+  .cover .hint{color:#717171;}
+  .cover .meta{background:#fff;border-color:#e1e1e1;}
+  .cover .meta>div{border-color:#e1e1e1;}
+  .cover .meta .v{color:#141414;}
+  :root{--ink:#141414;--ink2:#3b3b3b;--muted:#717171;--bg:#fbfbfa;--card:#fff;--line:#e1e1e1;--bg2:#f6f5f4;--line2:#e4e1de;--th:#f4f4f3;--tint:#fbf3f4;--tint2:#f3f3f2;--hoverrow:#fff;--link:#1a5f7a;--circle:#333;}
+  body{font-size:12px;}
+  footer{background:#fff;color:#555;border-top:1px solid var(--line);}
+  footer a{color:#333;}
+  footer .fine{color:#777;}
+}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Redundant Mechatronic Lab">
+  <div class="sn-inner">
+    <button type="button" class="sn-toggle" id="sn-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="sn-brand" href="../">Redundant lab</a>
+    <ul class="sn-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#projects">Projects</a></li>
+      <li><a href="../#contact">Contact</a></li>
+      <li class="sn-item"><button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme" title="Theme">
+        <svg class="ic-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ic-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- v6.3 (2026-10-03): restructured for clarity. Cleaner arc (what it is,
+     why it is easier to make, what was measured, who buys, what it costs),
+     minimal external references (one CMTI PDF + direct product/source
+     pages, all in a new tab), no marker system, no R&D pitch: the offer
+     is the machine as built and measured. -->
+
+<!-- ============ 01 · COVER ============ -->
+<section class="bpage cover" id="p01">
+  <video class="cover-vid" autoplay muted loop playsinline preload="metadata"
+         poster="../assets/img/projects/aerostatic_spindle_imtex.webp" aria-hidden="true">
+    <source src="../assets/video/spindle-cover.av1.webm" type="video/webm">
+    <source src="../assets/video/spindle-cover.mp4" type="video/mp4">
+  </video>
+  <div class="inner">
+    <div class="kicker">Redundant Mechatronic Lab · Mysuru, India</div>
+    <h1>Porous-Graphite Aerostatic Spindle (ABR-150M)</h1>
+    <p class="sub">A 150&nbsp;mm machine-tool spindle that machines and then measures. It turns up to <strong>100&nbsp;kg</strong> on a film of air only microns thick, holds <strong>400&nbsp;nm</strong> running accuracy, positions to <strong>±0.5&nbsp;arcsecond</strong> and test-runs to <strong>3,000&nbsp;rpm</strong> — the same class of precision rotation the market already imports, from an indigenous build that is fundamentally easier and cheaper to make. India-first market; Europe as the extension.</p>
+    <div class="meta">
+      <div><div class="k">Company</div><div class="v">Redundant Mechatronic Lab Pvt. Ltd. (RML), Mysuru</div></div>
+      <div><div class="k">Technology partner</div><div class="v">CMTI, Bengaluru — autonomous R&amp;D institute, Ministry of Heavy Industries, Govt. of India</div></div>
+      <div><div class="k">Unit</div><div class="v">ABR-150M — working prototype, TRL&nbsp;7; specification published by CMTI, Jan&nbsp;2025 <a href="https://cmti.res.in/wp-content/uploads/2025/02/SciMakIsse2Jan2025.pdf" target="_blank" rel="noopener">(PDF, new tab)</a></div></div>
+    </div>
+    <div class="hint">One flick = one page · external references open in a new tab</div>
+  </div>
+</section>
+
+<!-- ============ 02 · THE PITCH ============ -->
+<section class="bpage" id="p02">
+  <div class="inner">
+    <div class="ph"><div class="kicker">The pitch</div><h2>Not a new invention</h2></div>
+    <p class="notnew"><b>This project is not a new invention.</b> The air-bearing spindle is an established technology the market has bought for decades. What we change is how it is <b>made</b>: the same physics, with the hardest and most expensive part of an orifice-based spindle, the array of precision-drilled orifices, replaced by a porous graphite surface. The surface <b>is</b> the orifice: an easier, cheaper orifice source (the next two pages).</p>
+    <div class="stats">
+      <div class="stat"><div class="v">100 kg</div><div class="l">axial load — the part sits directly on the stage</div></div>
+      <div class="stat"><div class="v">400 nm</div><div class="l">running accuracy at 500 rpm (CMTI lab)</div></div>
+      <div class="stat"><div class="v">0.3 N/nm</div><div class="l">axial stiffness (0.15 N/nm radial)</div></div>
+      <div class="stat"><div class="v">±0.5″</div><div class="l">positioning — 1/7200 of a degree (a turn holds 1,296,000 arcseconds)</div></div>
+      <div class="stat"><div class="v">3,000 rpm</div><div class="l">test-run speed (accuracy characterized at 500 rpm); motor + servo drive rated 12,000</div></div>
+      <div class="stat"><div class="v">₹12 L</div><div class="l">prototype build cost — actual BOM, near the end</div></div>
+    </div>
+    <div class="callout neutral"><span class="t">The only consumable</span>
+    The only consumable is the air in the room, filtered and dried. No oil, no grease, no wearing parts: the entire upkeep of the axis is changing air filters.</div>
+  </div>
+</section>
+
+<!-- ============ 03 · HOW IT IS BUILT 1/2 ============ -->
+<section class="bpage" id="p03">
+  <div class="inner">
+    <div class="ph"><div class="kicker">How it is built · 1/2</div><h2>The orifice array is the hard part</h2></div>
+    <p>An aerostatic bearing meters a film of air only microns thick between the rotating shaft and the housing. How the air is metered, the restrictor, is what makes these machines hard and expensive to build.</p>
+    <ol>
+      <li><strong>The orifice insert is a precision part.</strong> Conventional (orifice-fed) bearings meter through tens of individually drilled orifices, <span class="num">150,000–400,000&nbsp;nm (0.15–0.4&nbsp;mm)</span> in diameter, located precisely on the bearing surface. Every orifice is a precision operation: drill, locate, inspect, assemble. Every unit is a precision assembly.</li>
+      <li><strong>The micro-geometry at each orifice mouth is a controlled feature.</strong> The fillet and chamfer between the supply hole and the pad surface measurably change the pressure field and the bearing's behaviour.</li>
+      <li><strong>The design space is non-trivial.</strong> Stiffness is not monotonic in orifice count, and the top accuracy classes (25–30&nbsp;nm) need lapping and matching of the bearing surfaces after assembly.</li>
+    </ol>
+    <p>The incumbents agree. Ken Abbott, president of ABTech (the leading maker of heavy metrology tables), named the cost drivers of the category in <em>MD Magazine</em> (Aug&nbsp;2024): <em>"the amount of labor involved to create the geometry … and the more expensive motors and encoders."</em></p>
+    <figure class="chart" role="img" aria-label="An orifice insert plate and a magnified orifice mouth">
+    <svg viewBox="0 0 560 150">
+      <rect x="8" y="24" width="244" height="84" rx="6" fill="var(--bg2)" stroke="var(--line2)" stroke-width="1.5"/>
+      <g fill="var(--bg)" stroke="var(--ink2)" stroke-width="1.5">
+        <circle cx="36" cy="50" r="7"/><circle cx="64" cy="50" r="7"/><circle cx="92" cy="50" r="7"/><circle cx="120" cy="50" r="7"/><circle cx="148" cy="50" r="7"/><circle cx="176" cy="50" r="7"/><circle cx="204" cy="50" r="7"/><circle cx="232" cy="50" r="7"/>
+        <circle cx="36" cy="82" r="7"/><circle cx="64" cy="82" r="7"/><circle cx="92" cy="82" r="7"/><circle cx="120" cy="82" r="7"/><circle cx="148" cy="82" r="7"/><circle cx="176" cy="82" r="7"/><circle cx="204" cy="82" r="7"/><circle cx="232" cy="82" r="7"/>
+      </g>
+      <text x="130" y="128" fill="var(--muted)" font-size="10" text-anchor="middle">orifice insert — drilled one by one</text>
+      <line x1="232" y1="50" x2="372" y2="56" stroke="var(--line2)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="424" cy="62" r="44" fill="var(--card)" stroke="var(--accent)" stroke-width="1.5"/>
+      <line x1="384" y1="40" x2="464" y2="40" stroke="var(--ink2)" stroke-width="2.5"/>
+      <rect x="384" y="40" width="80" height="44" fill="var(--bg2)" stroke="none"/>
+      <line x1="384" y1="84" x2="464" y2="84" stroke="var(--ink2)" stroke-width="1.5"/>
+      <rect x="416" y="40" width="16" height="44" fill="var(--bg)" stroke="none"/>
+      <line x1="416" y1="40" x2="416" y2="84" stroke="var(--ink2)" stroke-width="1.5"/>
+      <line x1="432" y1="40" x2="432" y2="84" stroke="var(--ink2)" stroke-width="1.5"/>
+      <path d="M416 40 L410 47 M432 40 L438 47" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+      <path d="M417 32 L424 20 L431 32" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="424" y="128" fill="var(--muted)" font-size="10" text-anchor="middle">the orifice mouth is a controlled micro-feature</text>
+    </svg>
+    <figcaption>Conventional: tens of individually drilled orifices, each a precision operation</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 04 · HOW IT IS BUILT 2/2 ============ -->
+<section class="bpage" id="p04">
+  <div class="inner">
+    <div class="ph"><div class="kicker">How it is built · 2/2</div><h2>The surface is the orifice</h2></div>
+    <p>In our design, air is metered through <strong>millions of sub-micron pores distributed across the whole bearing surface</strong>. The surface itself is the restrictor: metering is a material property of the porous graphite, not a machining operation. There is no orifice to drill, locate or assemble.</p>
+    <ul>
+      <li><strong>Uniform pressure, better stability.</strong> Measured micro-vibration: <span class="num">0.006 m/s²</span> (porous) vs <span class="num">0.020 m/s²</span> (orifice); the porous surface holds a more uniform pressure distribution across the whole gap.</li>
+      <li><strong>Stiffer at thin films.</strong> Below a 6,000&nbsp;nm air film, optimal stiffness <span class="num">0.0405 vs 0.0157 N/nm</span> (porous vs single orifice); at a 5,000&nbsp;nm film the porous pad carries <strong>8.8% more load</strong>.</li>
+      <li><strong>Crash-tolerant.</strong> The soft graphite face (≈&nbsp;91&nbsp;MPa compression) takes an accidental touchdown without scoring the counterface. A scratched porous surface keeps running; a scratched orifice array loses its geometry.</li>
+      <li><strong>Less air, less clogging.</strong> Distributed pores consume less compressed air and are harder to block than drilled holes.</li>
+    </ul>
+    <p class="srcnote">Figures: Chin. J. Mech. Eng. (2018, experiment + CFD); Aston University MSc thesis (2019); graphite compressive strength and air-consumption figures per New Way technical data (New Way is a vendor of porous bearings). RML keeps the full citation list.</p>
+    <figure class="chart" role="img" aria-label="Orifice-fed versus porous pressure distribution, and a magnified porous surface">
+    <svg viewBox="0 0 560 168">
+      <defs>
+        <pattern id="pores" width="10" height="7" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2" r="1.1" fill="var(--ink2)" opacity=".8"/><circle cx="7.5" cy="5" r="1.1" fill="var(--ink2)" opacity=".8"/></pattern>
+      </defs>
+      <rect x="8" y="14" width="252" height="38" rx="4" fill="var(--bg2)" stroke="var(--line2)" stroke-width="1.5"/>
+      <g fill="var(--bg)" stroke="var(--ink2)" stroke-width="1.3">
+        <circle cx="36" cy="33" r="3.2"/><circle cx="66" cy="33" r="3.2"/><circle cx="96" cy="33" r="3.2"/><circle cx="126" cy="33" r="3.2"/><circle cx="156" cy="33" r="3.2"/><circle cx="186" cy="33" r="3.2"/><circle cx="216" cy="33" r="3.2"/><circle cx="240" cy="33" r="3.2"/>
+      </g>
+      <path d="M16 74 L36 56 L56 74 L76 56 L96 74 L116 56 L136 74 L156 56 L176 74 L196 56 L216 74 L236 56 L252 74" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+      <text x="134" y="94" fill="var(--muted)" font-size="10" text-anchor="middle">orifice-fed: pressure peaks under each hole</text>
+      <rect x="300" y="14" width="252" height="38" rx="4" fill="var(--bg2)" stroke="var(--line2)" stroke-width="1.5"/>
+      <rect x="308" y="20" width="236" height="26" fill="url(#pores)"/>
+      <path d="M308 66 C 380 60, 460 60, 544 66" fill="none" stroke="var(--accent)" stroke-width="2"/>
+      <text x="426" y="94" fill="var(--muted)" font-size="10" text-anchor="middle">porous: uniform pressure over the whole surface</text>
+      <text x="8" y="118" fill="var(--ink2)" font-size="10">magnified bearing surface — the sub-micron pores are the constrictors:</text>
+      <rect x="8" y="126" width="544" height="32" rx="4" fill="var(--bg2)" stroke="var(--line2)" stroke-width="1.5"/>
+      <rect x="12" y="130" width="536" height="24" fill="url(#pores)"/>
+    </svg>
+    <figcaption>Porous graphite: the surface is the restrictor — uniform pressure, better stability</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 05 · WHAT WE HAVE ============ -->
+<section class="bpage" id="p05">
+  <div class="inner">
+    <div class="ph"><div class="kicker">What we have</div><h2>Measured, not projected</h2></div>
+    <p>A motor-driven, porous-graphite, aerostatic rotary stage, built with CMTI. The shaft floats on pressurised air: no contact, no friction, no wear. Every number below is measured for this unit — the speed row is the one exception, and it says so.</p>
+    <div class="tblwrap"><table class="spec2">
+      <tr><th style="width:30%">Spec</th><th>Value</th></tr>
+      <tr><td>Load capacity (axial)</td><td class="num"><b>100 kg</b> (≈ 981 N — a part up to ~100 kg sits on top)</td></tr>
+      <tr><td>Stiffness</td><td class="num"><b>0.3 N/nm axial · 0.15 N/nm radial</b></td></tr>
+      <tr><td>Running accuracy</td><td class="num"><b>&lt; 400 nm</b> at 500 rpm (the axis wobble per revolution)</td></tr>
+      <tr><td>Positioning</td><td class="num"><b>±0.5 arcsec</b> (1/7200 of a degree — a turn holds 1,296,000 of them; arcseconds are the industry's angle unit for precision rotation)</td></tr>
+      <tr><td>Step / repeatability</td><td class="num"><b>0.25 arcsec</b> / <b>&lt; 0.3 arcsec</b></td></tr>
+      <tr><td>Speed</td><td class="num">test-run to <b>3,000 rpm</b>; drive motor and servo drive rated to <b>12,000 rpm</b></td></tr>
+      <tr><td>Machining</td><td class="num">aluminium turned to <b>Ra ≈ 10 nm</b> — CMTI's published trial (1,000 rpm, 10,000 nm depth of cut, 5 mm/min feed)</td></tr>
+      <tr><td>Characterized</td><td>CMTI metrology lab — autocollimator + polygon mirror, per CMTI's published specification (Jan 2025) <a href="https://cmti.res.in/wp-content/uploads/2025/02/SciMakIsse2Jan2025.pdf" target="_blank" rel="noopener">(PDF, new tab)</a></td></tr>
+    </table></div>
+    <figure class="fig short">
+      <video muted loop playsinline preload="metadata"
+             poster="../assets/img/projects/spindle-spin-poster.webp" aria-hidden="true">
+        <source src="../assets/video/spindle-spin.av1.webm" type="video/webm">
+        <source src="../assets/video/spindle-spin.mp4" type="video/mp4">
+      </video>
+      <div class="cap">The ABR-150M top plate, rotating on the air film — CMTI's NANOSPIN stand, iMTEX 2025 (silent loop)</div>
+    </figure>
+    <p class="srcnote">Build cost ≈ ₹12 L per unit (RML actuals — the BOM is near the end of this brief). This brief sells what is measured: the machine as it exists, characterized in a national lab.</p>
+  </div>
+</section>
+
+<!-- ============ 06 · WHAT IT IS ============ -->
+<section class="bpage" id="p06">
+  <div class="inner">
+    <div class="ph"><div class="kicker">What it is</div><h2>A machine-tool spindle that also measures</h2></div>
+    <p>Most of the 150&nbsp;mm field is measuring instruments: they rotate a part, probe it, and print a number. They do not cut.</p>
+    <p>This is a <strong>spindle</strong>. It machines, turning, micro-drilling, diamond-turning finishing on heavy parts, and then it measures, roundness and TIR, flatness, indexed inspection, on the same stage without re-fixturing. The part sits directly on the stage (up to 100&nbsp;kg, no lifting fixture) and comes off finished and verified.</p>
+    <p>In metrology the winning metrics are not rpm: they are load, stiffness, stability and arcsecond indexing, and in the 100&nbsp;kg class all of them are on this axis. The 3,000&nbsp;rpm test-run speed matters when it <em>cuts</em>: high-speed finishing passes at a load where the incumbents stop at 120–800&nbsp;rpm.</p>
+    <p>That cutting claim is a published number now, not ours alone: CMTI ran the ABR-150M as the main spindle of its ultra-precision diamond-turning machine — aerostatic slides, vibration-isolated granite bed — turning aluminium at 1,000&nbsp;rpm, 10,000&nbsp;nm depth of cut, 5&nbsp;mm/min feed, to a measured surface roughness of <strong>Ra ≈ 10&nbsp;nm</strong> (<a href="https://cmti.res.in/wp-content/uploads/2025/03/SciMakIss1March2025.pdf" target="_blank" rel="noopener">CMTI's trial, PDF, new tab</a>).</p>
+    <div class="trio">
+      <div><b>Machines</b>turning · micro-drilling · diamond-turning finishing</div>
+      <div><b>Measures</b>roundness / TIR · flatness · indexed inspection</div>
+      <div><b>Maintains</b>air filters only — the air in the room is the consumable</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · THE FIELD 1/2 ============ -->
+<section class="bpage" id="p07">
+  <div class="inner">
+    <div class="ph"><div class="kicker">The field · 1/2</div><h2>The 150 mm class</h2></div>
+    <p>Who we replace in the same body size (specs from each vendor's own datasheets, Oct&nbsp;2026; all three sell on quote):</p>
+    <div class="vcs">
+      <div class="vc"><div class="vc-name"><b>New Way</b> <span class="vc-co">(US)</span> — <span class="vc-model">RT-150 (porous carbon)</span></div><div class="vc-spec">150 mm · 141 kg · ±2.86″ positioning · 120 rpm · 0.197/0.054 N/nm</div><div class="vc-price">quote-based — <a href="https://www.newwayairbearings.com/catalog/product/rt-150/" target="_blank" rel="noopener">product page <span class="ex">↗</span></a></div></div>
+      <div class="vc"><div class="vc-name"><b>PI</b> <span class="vc-co">(DE)</span> — <span class="vc-model">PIglide RM A-624.050</span></div><div class="vc-spec">150 mm · 123 kg · 600 rpm · ±1.65″ · 0.21/0.064 N/nm · 25–50 nm with controller-based error compensation (sold with the PI controller)</div><div class="vc-price">quote-based — <a href="https://www.physikinstrumente.com/en/products/rotation-stages/a-62x-piglide-rm-rotation-stage-with-air-bearings-900721" target="_blank" rel="noopener">product page <span class="ex">↗</span></a></div></div>
+      <div class="vc"><div class="vc-name"><b>Aerotech</b> <span class="vc-co">(US)</span> — <span class="vc-model">ABRS-150MP</span></div><div class="vc-spec">150 mm · 8 kg · 300 rpm · 175–450 nm · ±3″ (legacy model; the current series runs to the ABRS300MP — 97 kg at 500 rpm)</div><div class="vc-price">quote-based — <a href="https://www.aerotech.com/product/abrs-air-bearing-direct-drive-rotary-stage/" target="_blank" rel="noopener">series page <span class="ex">↗</span></a></div></div>
+    </div>
+    <p class="srcnote">The comparison is direct where it matters: 12× the load in the same size as Aerotech's 150 mm; 25× the speed of New Way's same-technology unit; 5–8× the speed of PI's, with the stiffer axis. All four incumbents sell on quote — the next two pages show what the market actually pays.</p>
+  </div>
+</section>
+
+<!-- ============ 08 · THE FIELD 2/2 ============ -->
+<section class="bpage" id="p08">
+  <div class="inner">
+    <div class="ph"><div class="kicker">The field · 2/2</div><h2>The fast + heavy corner was empty</h2></div>
+    <figure class="chart big" role="img" aria-label="Axial load versus speed for 150 to 250 mm air-bearing rotation; RML is the only point above 1,000 rpm at 100 kg">
+    <svg viewBox="0 0 560 320">
+      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="var(--muted)" stroke-width="1"/></marker></defs>
+      <rect x="331" y="80" width="189" height="137" fill="var(--accent)" opacity=".06"/>
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="81" y1="30" x2="81" y2="280"/>
+        <line x1="189" y1="30" x2="189" y2="280"/>
+        <line x1="271" y1="30" x2="271" y2="280"/>
+        <line x1="305" y1="30" x2="305" y2="280"/>
+        <line x1="461" y1="30" x2="461" y2="280"/>
+        <line x1="60" y1="213" x2="520" y2="213"/>
+        <line x1="60" y1="147" x2="520" y2="147"/>
+        <line x1="60" y1="80" x2="520" y2="80"/>
+      </g>
+      <line x1="60" y1="280" x2="528" y2="280" stroke="var(--line2)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="60" y1="280" x2="60" y2="22" stroke="var(--line2)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <g fill="var(--muted)" font-size="11" text-anchor="middle">
+        <text x="81" y="299">120</text><text x="189" y="299">300</text><text x="271" y="299">600</text><text x="305" y="299">800</text><text x="461" y="299">3,000</text>
+      </g>
+      <g fill="var(--muted)" font-size="11" text-anchor="end">
+        <text x="54" y="284">0</text><text x="54" y="217">50</text><text x="54" y="151">100</text><text x="54" y="84">150</text>
+      </g>
+      <text x="520" y="316" fill="var(--muted)" font-size="11" text-anchor="end">speed (rpm, log scale)</text>
+      <text x="66" y="16" fill="var(--muted)" font-size="11">axial load (kg)</text>
+      <text x="515" y="236" fill="var(--accent)" font-size="10" text-anchor="end" opacity=".8">the empty corner:</text>
+      <text x="515" y="250" fill="var(--accent)" font-size="10" text-anchor="end" opacity=".8">fast + heavy</text>
+      <g>
+        <circle cx="81" cy="45" r="6" fill="var(--muted)"/>
+        <text x="81" y="32" fill="var(--muted)" font-size="11" text-anchor="middle">New Way RT-150 · 141 kg</text>
+        <circle cx="189" cy="267" r="6" fill="var(--muted)"/>
+        <text x="189" y="254" fill="var(--muted)" font-size="11" text-anchor="middle">Aerotech ABRS-150 · 8 kg</text>
+        <circle cx="249" cy="118" r="6" fill="var(--muted)"/>
+        <text x="243" y="136" fill="var(--muted)" font-size="11" text-anchor="middle">ABRS-300 · 97 kg</text>
+        <circle cx="305" cy="97" r="6" fill="var(--muted)"/>
+        <text x="311" y="118" fill="var(--muted)" font-size="11">ABRX-250 · 110 kg</text>
+        <circle cx="271" cy="75" r="6" fill="var(--muted)"/>
+        <text x="265" y="64" fill="var(--muted)" font-size="11" text-anchor="end">PI A-624 · 123 kg</text>
+        <circle cx="461" cy="113" r="16" fill="var(--accent)" opacity=".22"/>
+        <circle cx="461" cy="113" r="9" fill="var(--accent)"/>
+        <text x="461" y="94" fill="var(--accent)" font-size="12" font-weight="700" text-anchor="middle">RML · 100 kg · 3,000 rpm</text>
+      </g>
+    </svg>
+    <figcaption>Same class, different corner — 150–250 mm air-bearing rotation (vendor datasheets, Oct 2026)</figcaption>
+    </figure>
+    <ul>
+      <li>The 100 kg class tops out at <strong>120–800 rpm</strong>: metrology rotation, not machining speed.</li>
+      <li>RML is the only point above <strong>1,000 rpm at 100 kg</strong> — machine-tool speed in a metrology body. That corner of the plot was empty.</li>
+      <li>The heavy metrology tables go bigger, not faster: <strong>ABTech's AT200</strong> carries 226 kg in a 406 mm swing (<a href="https://www.abtechmfg.com/precision-motion-components/rotary-tables/air-bearing-rotary-tables" target="_blank" rel="noopener">family <span class="ex">↗</span></a>), and its <strong>GE Vernova table — rated 16,000 kg — turns turbine rotors at 250 nm</strong> (<a href="https://www.abtechmfg.com/hubfs/ABTech%20GE%20Vernova%20Case%20Study%20Aerospace.pdf" target="_blank" rel="noopener">case study, PDF <span class="ex">↗</span></a>) — system-level proof of the spend.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 09 · ROUNDNES MACHINES ============ -->
+<section class="bpage" id="p09">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Who buys · A</div><h2>Roundness machines: they buy the rotary element</h2></div>
+    <p>A roundness machine is a frame, a probe, and a <strong>rotary element</strong>. The rotary element is exactly this product: a high-accuracy, heavy-load, arcsecond-indexed aerostatic rotary axis. The builders of compact roundness machines are therefore <strong>buyers, not rivals</strong>.</p>
+    <div class="pcs">
+      <div class="pc"><div class="pc-name"><b>Accurate Metrology</b> <span class="pc-loc">(Pune, IN)</span></div><div class="pc-what">builds the <b>Precirond 1000</b> roundness machine around a "high-accuracy air bearing spindle" (Ø160 mm table, 25 kg) — <a href="https://accuratemetrology.in/precirond-1000/" target="_blank" rel="noopener">machine page <span class="ex">↗</span></a></div><div class="pc-use"><b>Buyer</b>direct spindle buyer: a heavier, faster, more accurate rotary element for their machines</div></div>
+      <div class="pc"><div class="pc-name"><b>Tokyo Seimitsu / ACCRETECH</b> <span class="pc-loc">(JP; in India through Zeiss's partnership, as the RondoNEX)</span></div><div class="pc-what">RONDCOM NEX form tester: Ø235 mm <b>air-bearing</b> rotary table, 30/60 kg, 1–10 rpm, 20 nm rotation (<a href="https://www.zeiss.co.in/metrology/systems/form-and-surface-contour/rondcom-nex.html" target="_blank" rel="noopener">Zeiss India <span class="ex">↗</span></a> · <a href="https://www.accretech.com/en/product/measuring/system/rondcom/" target="_blank" rel="noopener">ACCRETECH <span class="ex">↗</span></a>)</div><div class="pc-use"><b>Buyer</b>ours carries 1.7–3.3× its load at 300× its speed</div></div>
+      <div class="pc"><div class="pc-name"><b>Mahr</b> <span class="pc-loc">(Göttingen, DE · Mahr Metrology India, Chennai)</span></div><div class="pc-what">MMQ 200 compact form tester — a valid Indian price anchor for the class. Note: its C-axis is <b>mechanical</b> (Mahr's deliberate choice: "up to 70× stiffer than air bearings"); Mahr's reference machines run air bearings on all axes, and Mahr itself sells third-party air bearings (<a href="https://metrology.mahr.com/fileadmin/assets/files/MarForm--MMQ%20200--3762774--FL--Formtester--EN--2021-11-25.pdf" target="_blank" rel="noopener">flyer, PDF <span class="ex">↗</span></a>)</div><div class="pc-use"><b>Buyer</b>the air-bearing upgrade path for their compact line</div></div>
+      <div class="pc"><div class="pc-name"><b>Taylor Hobson (Talyrond)</b> <span class="pc-loc">(UK/US)</span> · <b>Mitutoyo (Roundtest)</b> <span class="pc-loc">(JP)</span></div><div class="pc-what">both build their compact roundness lines on air-bearing rotation ("high-precision air bearing spindle"; the RA-2200: Ø235 mm, 30 kg, 2–10 rpm)</div><div class="pc-use"><b>Buyer</b>the same rotary element, one source</div></div>
+    </div>
+    <p class="srcnote">A compact roundness machine sells in India for ₹30 L–1.2 Cr (MMQ-200, current listing) — that is the whole system, not the rotary element. The axis is a fraction of that system price, and the builders are the buyers.</p>
+  </div>
+</section>
+
+<!-- ============ 10 · PRICE FLOOR ============ -->
+<section class="bpage" id="p10">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Who buys · B</div><h2>What India actually pays (verified list prices)</h2></div>
+    <p>The majors sell on quote, so the price evidence is public list prices and tender records, verified on the day (3&nbsp;Oct&nbsp;2026):</p>
+    <ul>
+      <li><strong>Insize 6875-400 air-floating rotary table: <span class="num">₹10,78,360 incl. GST</span></strong> — list price, industrybuying.com Insize store (the toolbuy.com India listing runs ₹11,72,557). 400 mm, 100 kg, &lt;300 nm runout, 0.25/0.5 N/nm. Official spec: <strong>manual drive — no motor, no encoder, no arcsecond positioning</strong>. The series runs ₹10.1 L (320 mm) to ₹12.0 L (500 mm). (<a href="https://www.insize.com/roundnesstester/6875.html" target="_blank" rel="noopener">official spec <span class="ex">↗</span></a> · <a href="https://www.industrybuying.com/rotary-table-insize-POW.ROT.929019345" target="_blank" rel="noopener">listing <span class="ex">↗</span></a>)</li>
+      <li><strong>So the price floor of air-bearing rotation in India is ~₹10 L at the manual tier</strong>, and real Indian buyers pay it today. Our unit is motorized, arcsecond-positioned, and test-run to 3,000&nbsp;rpm (drive rated to 12,000).</li>
+      <li><strong>Government procurement of the exact equipment class is live:</strong> an Aug&nbsp;2026 state tender (Durg, Chhattisgarh, GEM) for a roundness tester, roughness testers and gauges (<a href="https://tenderdekho.com/tender-detail/td-2IrcF9pUup" target="_blank" rel="noopener">tender <span class="ex">↗</span></a>).</li>
+    </ul>
+    <figure class="chart" role="img" aria-label="Verified India price points: Insize 6875-400 list at 10.8 lakh; RML target price at 25 lakh">
+    <svg viewBox="0 0 560 84">
+      <text x="0" y="14" fill="var(--ink2)" font-size="11">Insize 6875-400 — list, manual drive (verified 3 Oct 2026)</text>
+      <rect x="0" y="20" width="224" height="18" fill="var(--muted)" opacity=".55"/>
+      <text x="232" y="34" fill="var(--ink2)" font-size="11">₹10,78,360</text>
+      <text x="0" y="58" fill="var(--accent)" font-size="11" font-weight="700">RML price line — motorized, arcsecond-positioned, test-run to 3,000 rpm</text>
+      <rect x="0" y="64" width="520" height="18" fill="var(--accent)"/>
+      <text x="528" y="78" fill="var(--accent)" font-size="11" font-weight="700">₹25 L</text>
+    </svg>
+    <figcaption>Verified list price versus our price line — linear scale, width ∝ price</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 11 · USE CASES 1/2 ============ -->
+<section class="bpage" id="p11">
+  <div class="inner">
+    <div class="ph"><div class="kicker">What it is for · 1/2</div><h2>Eight use cases, each with a named buyer</h2></div>
+    <ol>
+      <li><strong>Roundness / TIR inspection of heavy turned parts</strong> (shafts, rollers, bearing races, heavy hubs — 5–100 kg): the part sits directly on the stage; 0.3 N/nm keeps it rigid under probe force; ±0.5″ indexed checks. <em>Buyers:</em> HAL, MTAR, Turbo Energy, NPL, Accurate Metrology (as a system).</li>
+      <li><strong>Aerospace turbine / impeller / blisk inspection (MRO &amp; repair):</strong> the GE Vernova 16,000 kg / 250 nm rotor table proves the spend at system level; at component level (5–100 kg) runout and profile checks want zero-friction reference rotation; dry operation matters in paint/prime environments. <em>Buyer:</em> HAL Engine Division (16,500+ engines repaired &amp; overhauled).</li>
+      <li><strong>Diamond turning / optical machining of heavy optics</strong> (ZnSe/Ge IR optics, large aspheres, mirror blanks — 10–100 kg): 0.3 N/nm holds the part rigid under cutting forces; 3,000 rpm test-run speed enables high-speed finishing passes where the 100 kg class stops at 120–800 rpm. <em>Buyer:</em> Stellar Optics; also RML's own diamond-turning platform.</li>
+      <li><strong>Flatness / flat-of-rotation metrology of heavy plates and substrates</strong> (glass, SiC wafers, mirror blanks): the plate rotates on the flatness reference; 400 nm floor with 0.3 N/nm axial stiffness for plate weight; a validated demand class at 2–4× the body size. <em>Buyers:</em> optics and metrology labs (Stellar, NPL class).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 12 · USE CASES 2/2 ============ -->
+<section class="bpage" id="p12">
+  <div class="inner">
+    <div class="ph"><div class="kicker">What it is for · 2/2</div><h2>Eight use cases, each with a named buyer</h2></div>
+    <ol start="5">
+      <li><strong>Heavy C-axis for CMMs and 5-axis inspection/machining:</strong> 100 kg fixture capacity in a machine-mountable 150 mm package; frictionless rotation, no stick-slip, arcsecond positioning. <em>Buyer:</em> Guindy Machine Tools — the Indian CMM maker already building on air bearings.</li>
+      <li><strong>Rate tables, inertia test stands, torque rigs, gyro/IMU calibration (defence/aero test):</strong> zero-friction rotation gives clean torque/inertia measurement of heavy rotors; a niche the international vendors actively serve. <em>Buyers:</em> DRDO network (via CMTI), MTAR.</li>
+      <li><strong>Beamline / scientific-instrument rotation of heavy sample environments</strong> (cryostats, UHV chambers, heavy goniometers — 10–100 kg): arcsecond positioning + nm-class stability; the US imports this class (a 2026 Federal Register approval let Argonne National Laboratory import a "High Precision Air Bearing Stage" duty-free — no US-made instrument of equivalent value existed at time of order). <em>Buyer:</em> RRCAT, India's synchrotron, 7+ beamlines.</li>
+      <li><strong>Precision indexing / assembly of heavy precision parts</strong> (flywheels, rotors, antenna/radar panels, heavy satellite components): 100 kg + 0.25″ steps in a compact package. <em>Buyers:</em> satellite/aero OEMs (MTAR class).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 13 · INDIA PROSPECTS 1/2 ============ -->
+<section class="bpage" id="p13">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Who buys · C — India · 1/2</div><h2>Named prospects, verified</h2></div>
+    <div class="pcs">
+      <div class="pc"><div class="pc-name"><b>HAL, Engine Division</b> <span class="pc-loc">(Bengaluru)</span> — <a href="https://hal-india.co.in/production-unit-details/engine-division-bangalore" target="_blank" rel="noopener">division page <span class="ex">↗</span></a></div><div class="pc-what">est. 1956; 3,100+ engines built, 16,500+ repaired &amp; overhauled; exports components to Safran, Rolls-Royce, Honeywell</div><div class="pc-use"><b>Use case</b>turbine-component inspection in MRO — blisks, disks, shafts, 5–100 kg</div></div>
+      <div class="pc"><div class="pc-name"><b>MTAR Technologies</b> <span class="pc-loc">(Hyderabad)</span> — <a href="https://themachinemaker.com/news/mtar-technologies-secures-%e2%82%b915-4-crore-order-from-drdl-for-advanced-engine-components/" target="_blank" rel="noopener">₹15.4 Cr DRDL order <span class="ex">↗</span></a></div><div class="pc-what">40+ yrs clean energy / space / defence; ISRO liquid-propulsion components (turbo pumps, gas generators, injector heads); ₹15.4 Cr DRDL scramjet-combustor order (2024)</div><div class="pc-use"><b>Use case</b>roundness &amp; runout of impellers, rotors, injector heads, combustor rings</div></div>
+      <div class="pc"><div class="pc-name"><b>Turbo Energy (TEL)</b> <span class="pc-loc">(Chennai)</span> — <a href="https://www.turboenergy.co.in/" target="_blank" rel="noopener">site <span class="ex">↗</span></a></div><div class="pc-what">India's largest turbocharger maker (BorgWarner lineage); capacity 1.8M turbochargers + 5M parts/yr</div><div class="pc-use"><b>Use case</b>compressor/turbine-wheel roundness + balance verification at production scale</div></div>
+      <div class="pc"><div class="pc-name"><b>Stellar Optics</b> <span class="pc-loc">(Bengaluru)</span> — <a href="https://stellaroptics.co.in/" target="_blank" rel="noopener">site <span class="ex">↗</span></a></div><div class="pc-what">precision optics for space / aero / defence; 30+ yrs; ISO 9001 + AS9100D</div><div class="pc-use"><b>Use case</b>heavy-optics diamond turning (IR optics in ZnSe/Ge)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · INDIA PROSPECTS 2/2 ============ -->
+<section class="bpage" id="p14">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Who buys · C — India · 2/2</div><h2>Named prospects, verified</h2></div>
+    <div class="pcs">
+      <div class="pc"><div class="pc-name"><b>Guindy Machine Tools (GMT)</b> <span class="pc-loc">(Chennai, est. 1959)</span> — <a href="https://gmt.co.in/products/" target="_blank" rel="noopener">products <span class="ex">↗</span></a></div><div class="pc-what">Indian CMM maker — all axes on air bearings; CMM calibration, retrofits, contract inspection; makes rotary indexing tables</div><div class="pc-use"><b>Use case</b>heavy C-axis for CMMs; roundness-system integration; retrofit of existing CMMs</div></div>
+      <div class="pc"><div class="pc-name"><b>Accurate Metrology</b> <span class="pc-loc">(Pune)</span> — <b>Precirond 1000</b></div><div class="pc-what">builds the Precirond 1000 roundness machine around a "high-accuracy air bearing spindle" (Ø160 mm table, 25 kg, 100 nm resolution)</div><div class="pc-use"><b>Use case</b><b>direct spindle buyer</b> — heavier / faster / more accurate rotary element for their machines</div></div>
+      <div class="pc"><div class="pc-name"><b>CSIR-NPL</b> <span class="pc-loc">(New Delhi)</span> — <a href="https://www.nplindia.org/wp-content/uploads/2021/11/DP-102.pdf" target="_blank" rel="noopener">lab profile, PDF <span class="ex">↗</span></a></div><div class="pc-what">India's national metrology lab; primary length standard; roundness-machine calibration; 40 nm external-diameter setup; 60 nm interferometric roundness calibration</div><div class="pc-use"><b>Use case</b>reference rotation for roundness standards; certification anchor</div></div>
+      <div class="pc"><div class="pc-name"><b>RRCAT</b> <span class="pc-loc">(Indore)</span> — <a href="https://www.rrcat.gov.in/technology/accel/srul/index.html" target="_blank" rel="noopener">synchrotron <span class="ex">↗</span></a></div><div class="pc-what">India's national synchrotron (Indus-1/Indus-2); 7+ beamlines; high-precision 5-axis sample stages (2D translation + rotation + tilt)</div><div class="pc-use"><b>Use case</b>beamline sample rotation (heavy goniometers, sample environments)</div></div>
+    </div>
+    <p class="srcnote">Why each fits: 100 kg direct load without lifting fixtures, 0.3 N/nm under probe or cutting force, ±0.5″ indexed checks, dry operation — and for NPL, to our knowledge the only indigenous arcsecond-class 100 kg rotation — an import substitute for a reference chain.</p>
+  </div>
+</section>
+
+<!-- ============ 15 · EUROPE ============ -->
+<section class="bpage" id="p15">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Who buys · D — Europe</div><h2>Europe — the extension</h2></div>
+    <div class="pcs">
+      <div class="pc"><div class="pc-name"><b>PTB</b> <span class="pc-loc">(Braunschweig, DE)</span> — <a href="https://www.ptb.de/cms/en/ptb/fachabteilungen/abt5/kalmess/calibration-services.html" target="_blank" rel="noopener">calibration services <span class="ex">↗</span></a></div><div class="pc-what">German national metrology lab; Dept. 5.2 (Dimensional Nanometrology) calibrates <b>rotary encoders, indexing/angle tables, optical indexing heads, autocollimators</b></div><div class="pc-use"><b>Use case</b>rotation calibration + reference; the door into the EU NMI network</div></div>
+      <div class="pc"><div class="pc-name"><b>VTT MIKES</b> <span class="pc-loc">(Espoo, FI)</span> — <a href="https://www.vttresearch.com/en/ourservices/vtt-mikes" target="_blank" rel="noopener">VTT MIKES <span class="ex">↗</span></a></div><div class="pc-what">Finland's national metrology institute (ISO 17025; length, angle &amp; geometry; CIPM MRA / EURAMET)</div><div class="pc-use"><b>Use case</b>the EU wedge — the partner's home region; calibration + validation channel</div></div>
+      <div class="pc"><div class="pc-name"><em>Pattern</em></div><div class="pc-what">National beamline facilities (DESY / CERN class) via the same metrology network</div><div class="pc-use"><b>Use case</b>sample-rotation stages for heavy sample environments</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16 · BD ACTIONS ============ -->
+<section class="bpage" id="p16">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Who buys · E</div><h2>First concrete BD actions, in order</h2></div>
+    <ol>
+      <li><strong>Pull formal quotes from Aerotech, PI, ABTech and New Way</strong> for the four quote-based incumbents' 150–250 mm heavy-load models. Vendors quote in EUR; we compare against landed import cost in INR. <strong>Those four quotes set our price line.</strong></li>
+      <li><strong>Prospect conversations</strong> — HAL, MTAR, Turbo Energy, Stellar, GMT, NPL, RRCAT — via CMTI's ISRO / DRDO / science-lab network; and the roundness-machine builders (Accurate Metrology, Mahr India, the ACCRETECH / Tokyo Seimitsu channel) as direct axis buyers.</li>
+      <li><strong>The government procurement channel (GEM)</strong> — bids for metrology systems and precision instruments; the Aug 2026 Durg tender (roundness tester + gauges) shows the class moving through this channel.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 17 · POSITIONING ============ -->
+<section class="bpage" id="p17">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Business direction · 1/2</div><h2>Positioning, and the lead market</h2></div>
+    <p><strong>Positioning.</strong> The same class of precision rotation the market already buys — from an indigenous source, at a build cost the incumbents' structure cannot match, with heavy load and stiffness they only reach in bigger, costlier packages. We win on <strong>load + stiffness + speed + price + indigenous</strong>.</p>
+    <p><strong>Lead market: India's import substitution.</strong> In FY2024-25 India's machine-tool imports were <span class="num">₹18,686 Cr</span> against domestic production of <span class="num">₹14,566 Cr</span> and total consumption of <span class="num">₹31,781 Cr</span> — imports were <strong>59% of consumption</strong> (IMTMA, FY2024-25). Precision air-bearing stages and spindles sit on the imported side; even the US imports this class (the Argonne approval). <strong>Europe as the extension</strong> — the partner's own network: NMI calibration (PTB, VTT MIKES) and the EU metrology/beamline scene.</p>
+    <figure class="chart" role="img" aria-label="The named channel: CMTI network to prospects to procurement">
+    <svg viewBox="0 0 560 88">
+      <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="var(--muted)" stroke-width="1"/></marker></defs>
+      <rect x="8" y="14" width="120" height="60" rx="4" fill="var(--bg2)" stroke="var(--line2)"/>
+      <g fill="var(--ink2)" font-size="10" text-anchor="middle">
+        <text x="68" y="34" fill="var(--ink)" font-weight="700">CMTI network</text>
+        <text x="68" y="49">ISRO · DRDO</text>
+        <text x="68" y="63">science labs</text>
+      </g>
+      <line x1="132" y1="44" x2="162" y2="44" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arr2)"/>
+      <rect x="168" y="6" width="220" height="76" rx="4" fill="var(--bg2)" stroke="var(--line2)"/>
+      <g fill="var(--ink2)" font-size="10" text-anchor="middle">
+        <text x="278" y="24" fill="var(--ink)" font-weight="700">Named prospects</text>
+        <text x="278" y="41">HAL · MTAR · Turbo Energy</text>
+        <text x="278" y="57">Stellar · GMT · NPL · RRCAT</text>
+        <text x="278" y="73">Accurate Metrology · Mahr</text>
+      </g>
+      <line x1="392" y1="44" x2="422" y2="44" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arr2)"/>
+      <rect x="428" y="14" width="124" height="60" rx="4" fill="var(--bg2)" stroke="var(--line2)"/>
+      <g fill="var(--ink2)" font-size="10" text-anchor="middle">
+        <text x="490" y="34" fill="var(--ink)" font-weight="700">GEM bids</text>
+        <text x="490" y="49">EU: PTB · VTT</text>
+        <text x="490" y="63">quote-based OEMs</text>
+      </g>
+    </svg>
+    <figcaption>The named channel</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 18 · CMTI + ECONOMICS ============ -->
+<section class="bpage" id="p18">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Business direction · 2/2</div><h2>CMTI's role, and the economics</h2></div>
+    <p><strong>CMTI's role.</strong> Joint-IP partner; built the first unit with us; owns the metrology lab that characterized it (autocollimator + polygon mirror); national-lab network (ISRO, DRDO, science labs); holds an orifice-based ultra-precision line in the same precision class; publicly offers the air-bearing rotary table technology to industry for mass commercialisation (CMTI, The Science of Making, Jan 2025 — linked on the spec page). The asset for us: credibility, characterization capability, and a national-lab channel.</p>
+    <p><strong>Economics (INR, indicative).</strong> Prototype build ₹12 L (actual BOM, near the end of this brief). At a ~₹25 L price: <strong>52% gross margin at today's cost</strong>. Two levers: hold price against the quote-based incumbents, or price below the landed import cost of the same class — any price at or above ₹24 L keeps the margin at 50%+. Few units a year, high margin: a specialty engineering business, not a volume play.</p>
+    <figure class="fig short"><img class="bench" src="../assets/img/projects/cmti-bench.webp" alt="CMTI's metrology bench: the ABR-150M on its test block with the NANOSPIN brochure and the optical test setup" loading="lazy"><div class="cap">CMTI's metrology bench — the stage under the autocollimator + polygon mirror that characterized it (CMTI, The Science of Making, Jan 2025 — PDF linked on the spec page)</div></figure>
+  </div>
+</section>
+
+<!-- ============ 19 · WHAT WE ARE SEEKING ============ -->
+<section class="bpage" id="p19">
+  <div class="inner">
+    <div class="ph"><div class="kicker">What we are seeking</div><h2>An operating partner, not a lab</h2></div>
+    <div class="callout"><span class="t">The offer</span>
+    The offer is the machine as built and measured — a working, characterized asset. This brief sells that. No further R&amp;D is promised or required to sell it: what exists is what is offered.</div>
+    <p>We are seeking an <strong>operating partner</strong> — not a funding round, not an IP sale. The IP is jointly held with CMTI and the Ministry of Heavy Industries; RML holds the exclusive commercialization rights (through Dec 2029) and a stake (equity / royalties); the partner runs commercialization — build, sales, service; RML remains the technology owner. This brief tests fit.</p>
+    <p>If there is interest, the next step is a focused conversation and a technical package (drawings + test data) under NDA — starting with the four competitor quotes that set the price line.</p>
+    <figure class="fig short"><img src="../assets/img/projects/stand-monitor.webp" alt="The ABR-150M on CMTI's NANOSPIN stand at iMTEX 2025 with the characterization software running on the monitor" loading="lazy"><div class="cap">CMTI's NANOSPIN stand at iMTEX 2025 (MHI Industry Accelerator programme) — the stage, with its characterization software running</div></figure>
+  </div>
+</section>
+
+<!-- ============ 20 · HONEST LIMITATIONS ============ -->
+<section class="bpage" id="p20">
+  <div class="inner">
+    <div class="ph"><div class="kicker">Honest limitations</div><h2>Five, stated plainly</h2></div>
+    <ol>
+      <li>The 400 nm is the measured figure of the built unit (off-the-shelf graphite sleeve, best of three, CMTI lab). We sell what was measured.</li>
+      <li>One built unit; no production process yet. Small, low-volume market — realistically a few units a year — so this is a high-margin specialty business, not venture scale.</li>
+      <li>No service or spare-parts network yet — the established brands ship support contracts and replacement parts. An operating partner brings that as a core strength.</li>
+      <li>Speed: 500 rpm is the characterized number (accuracy is measured there); 3,000 rpm is the test-run speed; the drive motor and servo drive are rated to 12,000 rpm.</li>
+      <li>The IP owner is completing a PhD and cannot run day-to-day commercialization — which is why this is an operating-partner ask, not a founder-led rollout.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 21 · THE REAL BOM ============ -->
+<section class="bpage" id="p21">
+  <div class="inner">
+    <div class="ph"><div class="kicker">The real BOM</div><h2>What this unit cost to build</h2></div>
+    <p>Prototype build cost, per unit (RML actuals):</p>
+    <div class="tblwrap"><table>
+      <tr><th>Item</th><th>Type</th><th class="num" style="text-align:right">Cost (₹)</th></tr>
+      <tr><td>Porous-graphite sleeve (New Way)</td><td>imported</td><td class="num" style="text-align:right">1,50,000</td></tr>
+      <tr><td>Direct-drive motor</td><td>imported</td><td class="num" style="text-align:right">2,50,000</td></tr>
+      <tr><td>Servo controller</td><td>imported</td><td class="num" style="text-align:right">2,00,000</td></tr>
+      <tr><td>Optical encoder, arcsecond-class (Renishaw)</td><td>imported</td><td class="num" style="text-align:right">2,50,000</td></tr>
+      <tr><td>Raw materials</td><td>—</td><td class="num" style="text-align:right">1,00,000</td></tr>
+      <tr><td>Machining</td><td>—</td><td class="num" style="text-align:right">60,000</td></tr>
+      <tr><td><b>Parts subtotal</b></td><td></td><td class="num" style="text-align:right"><b>10,10,000</b></td></tr>
+      <tr><td>Overheads (≈ 19%)</td><td></td><td class="num" style="text-align:right">1,90,000</td></tr>
+      <tr><td><b>Build cost per unit</b></td><td></td><td class="num" style="text-align:right"><b>≈ 12,00,000 (₹12 L)</b></td></tr>
+    </table></div>
+    <figure class="chart" role="img" aria-label="84% of the parts cost is four imported items">
+    <svg viewBox="0 0 340 30">
+      <rect x="0" y="4" width="285.6" height="14" rx="2" fill="var(--accent)"/>
+      <rect x="285.6" y="4" width="54.4" height="14" rx="2" fill="var(--muted)" opacity=".55"/>
+      <text x="8" y="14.5" fill="#fff" font-size="8.5">84% — sleeve · motor · controller · encoder (imported)</text>
+      <text x="340" y="27" fill="var(--muted)" font-size="9" text-anchor="end">16% — Indian material &amp; labour</text>
+    </svg>
+    </figure>
+    <p class="srcnote">The imported items are standard, available components — nothing exotic. The machine is an integration of proven parts, built and characterized in India.</p>
+  </div>
+</section>
+
+<!-- ============ 22 · COLOPHON ============ -->
+<section class="bpage colophon" id="p22">
+  <div class="inner">
+    <footer>
+      <p><a href="../">← Back to Redundant Mechatronic Lab</a></p>
+      <p>© 2026 Redundant Mechatronic Lab Pvt. Ltd. · Mysuru, India</p>
+      <p>Linear figures in nm throughout (stiffness in N/nm; positioning in arcseconds — an angle unit, as in CMTI's published specification). Prices in INR; list prices verified 3 Oct 2026 (the major vendors sell on quote — that is why list prices and tender records are the evidence here). PI's 25–50 nm is with controller-based error compensation (the stage is sold with the PI controller). Running accuracy at the 500 rpm characterization speed; 3,000 rpm is the test-run speed; the drive motor and servo drive are rated to 12,000 rpm (make and model not disclosed). CMTI references — two, with different roles: the ABR-150M specification, "The Science of Making", Jan&nbsp;2025 (linked on the cover and the measured-numbers page), and CMTI's published machining trial, Mar&nbsp;2025 (linked on the machine-tool spindle page).</p>
+      <p class="fine">Prepared by RML, 3 Oct 2026 (v6.3 — restructured: cleaner arc, minimal external references, all external links open in a new tab). Unlisted page: reachable by direct link only; it is not linked from the site.</p>
+    </footer>
+  </div>
+</section>
+
+<button type="button" class="page-nav" id="page-nav" aria-label="Next page">
+  <svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  <svg class="ic-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+</button>
+<div class="page-ind" id="page-ind" aria-hidden="true">01 / 22</div>
+
+<script>
+/* Page navigation + governor (v6.3) — the site's circle + readout, plus the
+   site's wheel governor: a burst of wheel events (a trackpad fling) = one
+   gesture = exactly ONE page (the 800 ms settle lock swallows the burst's
+   tail). A hard touch flick = one page; gentle swipes leave native snap.
+   If a page's .inner overflows on a small screen, wheel/touch over the
+   page scrolls that overflow natively until it is exhausted, then pages. */
+(function(){
+  var nav = document.getElementById('page-nav');
+  var ind = document.getElementById('page-ind');
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.bpage'));
+  var raf = null;
+  var lockedUntil = 0;
+  function current(){
+    var idx = Math.round(window.scrollY / window.innerHeight);
+    return Math.max(0, Math.min(pages.length - 1, idx));
+  }
+  function update(){
+    raf = null;
+    var idx = current();
+    var last = idx === pages.length - 1;
+    nav.classList.toggle('at-end', last);
+    nav.setAttribute('aria-label', last ? 'Back to top' : 'Next page');
+    ind.textContent = ("0" + (idx + 1)).slice(-2) + " / " + pages.length;
+  }
+  function queue(){
+    if(raf) return;
+    raf = requestAnimationFrame(update);
+  }
+  // Can this page's .inner (content overflowing on small screens) still
+  // scroll natively in the given direction?
+  function contentCanScrollY(dir, idx){
+    var pg = pages[idx === undefined ? current() : idx];
+    var inner = pg && pg.querySelector('.inner');
+    if(!inner || inner.scrollHeight <= inner.clientHeight + 2) return false;
+    if(dir === 1) return inner.scrollTop + inner.clientHeight < inner.scrollHeight - 8;
+    return inner.scrollTop > 8;
+  }
+  function stepPage(fromIdx, dir){
+    var target = Math.max(0, Math.min(pages.length - 1, fromIdx + dir));
+    window.scrollTo({top: target * window.innerHeight, behavior: 'smooth'});
+    lockedUntil = Date.now() + 800; // let the paper settle before the governor acts
+  }
+  nav.addEventListener('click', function(){
+    var idx = current();
+    if(idx === pages.length - 1) {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      lockedUntil = Date.now() + 1400; // long trip home
+    } else stepPage(idx, 1);
+  });
+  window.addEventListener('scroll', queue, {passive: true});
+  window.addEventListener('resize', queue);
+
+  // Deep link: ?page=N opens directly on that page (shareable per-page links).
+  (function(){
+    var m = location.search.match(/[?&]page=(\d+)/);
+    if (!m) return;
+    var n = parseInt(m[1], 10);
+    if (n >= 1 && n <= pages.length) window.scrollTo(0, (n - 1) * window.innerHeight);
+  })();
+
+  // ---------------- Wheel ----------------
+  // A burst of wheel events (a fling) = one gesture = exactly one page.
+  var wheelActive = false;
+  var wheelAccum = 0;
+  var wheelTimer = null;
+  window.addEventListener('wheel', function(event){
+    if(Date.now() < lockedUntil){
+      event.preventDefault();
+      return;
+    }
+    if(!wheelActive){
+      var dir0 = event.deltaY > 0 ? 1 : -1;
+      if(contentCanScrollY(dir0)) return; // page content overflows: native scroll inside the page
+      wheelActive = true;
+      wheelAccum = 0;
+    }
+    event.preventDefault(); // own the whole gesture
+    wheelAccum += event.deltaY;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(function(){
+      wheelActive = false;
+      var dir = wheelAccum > 0 ? 1 : (wheelAccum < 0 ? -1 : 0);
+      wheelAccum = 0;
+      if(!dir) return;
+      stepPage(current(), dir);
+    }, 180);
+  }, {passive: false});
+
+  // ---------------- Touch ----------------
+  // A hard flick = exactly one page; a gentle swipe = native snap.
+  var touchY = null;
+  var touchT = 0;
+  var touchStartPage = null;
+  window.addEventListener('touchstart', function(event){
+    touchY = event.touches[0].clientY;
+    touchT = Date.now();
+    touchStartPage = current();
+  }, {passive: true});
+  window.addEventListener('touchend', function(event){
+    if(touchY === null) return;
+    var d = touchY - event.changedTouches[0].clientY;
+    var dt = Date.now() - touchT;
+    touchY = null;
+    if(dt === 0 || Math.abs(d) < 40) return;      // a tap, not a swipe
+    if(Math.abs(d) / dt < 0.4) return;             // gentle: CSS snap handles it
+    var dir = d > 0 ? 1 : -1;
+    if(contentCanScrollY(dir, touchStartPage)) return; // flicking inside overflowing page content
+    stepPage(touchStartPage, dir);
+  }, {passive: true});
+
+  update();
+})();
+/* Theme toggle (2026-10): the sun/moon button in the site-nav.
+   No stored choice -> follows the OS (prefers-color-scheme) live;
+   a click stores the choice (rml-theme) and overrides the OS. */
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var mqLight = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+  function effective(){
+    var t = root.getAttribute('data-theme');
+    if (t === 'light' || t === 'dark') return t;
+    return (mqLight && mqLight.matches) ? 'light' : 'dark';
+  }
+  function sync(){
+    if (!btn) return;
+    var light = effective() === 'light';
+    btn.classList.toggle('in-light', light);
+    btn.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+    btn.title = light ? 'Dark mode' : 'Light mode';
+  }
+  if (btn) {
+    btn.addEventListener('click', function(){
+      var next = effective() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('rml-theme', next); } catch (e) {}
+      sync();
+    });
+  }
+  if (mqLight && mqLight.addEventListener) {
+    mqLight.addEventListener('change', function(){
+      if (!root.getAttribute('data-theme')) sync();
+    });
+  }
+  sync();
+})();
+/* Mobile menu (2026-10-02): the hamburger + drop-down that mirrors the
+   main site's mobile nav. Closes when a link is chosen. */
+(function(){
+  var nav = document.querySelector('.site-nav');
+  var btn = document.getElementById('sn-toggle');
+  if (!nav || !btn) return;
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('.sn-links a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+/* Brief videos (cover orbit + p06 top-plate loop): muted loops that play
+   only while on screen. No-JS / unsupported codec: the poster shows. */
+(function(){
+  var vids = document.querySelectorAll('.bpage video');
+  if (!vids.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v = e.target;
+      if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      else v.pause();
+    });
+  }, {threshold: 0.25});
+  vids.forEach(function(v){ io.observe(v); });
+})();
+</script>
+</body>
+</html>
